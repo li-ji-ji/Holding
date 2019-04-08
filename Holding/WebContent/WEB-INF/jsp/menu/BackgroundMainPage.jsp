@@ -126,7 +126,7 @@
 		
 		layui.use('element', function() {
 			var element = layui.element;
-			element.on('event(过滤器值)', function () {
+			element.on('nav(all)', function () {
 				console.log();
 			});
 		});
