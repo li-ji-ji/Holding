@@ -1,0 +1,11 @@
+指定区域图书馆列表
+http://localhost:8080/Holding/library/getLibraryList.do?provinceId=1&cityId=1
+
+根据各层级id定位位置
+http://localhost:8080/Holding/library/getLibraryVm.do?libraryId=1&floorId=1&roomId=1&deskId=1&seatId=1
+
+通过图书馆id获取楼层列表及每个楼层的自习室列表
+http://localhost:8080/Holding/floor/getFloorCListVmListByLibraryId.do?libraryId=1
+
+通过自习室id获取自习室中的座子列表及每张座子的座位列表
+http://localhost:8080/Holding/desk/getDeskCListVmListByroomId.do?roomId=1
