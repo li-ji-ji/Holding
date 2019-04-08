@@ -7,9 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>后台管理</title>
+<style type="text/css">
+	.menagement-table{
+		width: 100%;
+	}
+</style>
 <link rel="stylesheet"
 	href="${basePath }/js/plugins/layui/css/layui.css" media="all">
-<script type="text/javascript"  src="${basePath }/js/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="${basePath }/js/jquery-3.3.1.js"></script>
 </head>
 <body class="layui-layout-body">
 	<div class="layui-layout layui-layout-admin">
@@ -34,21 +39,20 @@
 		<div class="layui-side layui-bg-black">
 			<div class="layui-side-scroll">
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-				<ul class="layui-nav layui-nav-tree " lay-shrink="all" lay-filter="test" >
+				<ul class="layui-nav layui-nav-tree " lay-shrink="all"
+					lay-filter="test">
 					<c:forEach var="menu" items="${menus}">
-						<li class="layui-nav-item" onclick="getOnClickItem(this.id)"
-							id="" lay-filter="secondemenu">
-							<a class="" href="javascript:;">${menu.menuname}
-								<span class="layui-nav-more"></span>
-						    </a> 
-							 <dl class="layui-nav-child">
-								<c:forEach  items="${menu.menus}" var="sub">
-								<dd>
-									<a href="javascript:;">${sub.menuname}</a>
-								</dd>
+						<li class="layui-nav-item" id="" lay-filter="secondemenu"><a
+							class="" href="javascript:;">${menu.menuname} <span
+								class="layui-nav-more"></span>
+						</a>
+							<dl class="layui-nav-child">
+								<c:forEach items="${menu.menus}" var="sub">
+									<dd>
+										<a href="javascript:;">${sub.menuname}</a>
+									</dd>
 								</c:forEach>
-							</dl> 
-								<%--
+							</dl> <%--
 								废弃二级列表循环
 								 <dl class="layui-nav-child">
 									<c:forEach var="j" begin="1" end="${sessionScope.secondMenuLength}">
@@ -59,43 +63,113 @@
 									</c:if>
 									</c:forEach>
 								</dl>
-								 --%>
-						</li>
+								 --%></li>
 					</c:forEach>
-					</ul>
-					</div>
-				
-
-
+				</ul>
+			</div>
+		
+		</div>
 		<div class="layui-body">
-			<!-- 内容主体区域 -->
-			<div id="test1"></div>
-		</div>
+			<iframe src="/Holding/user/getUserTable.do" width="100%" height="100%"></iframe>
 
-		<div class="layui-footer">
-			<!-- 底部固定区域 -->
-			管理员界面 - 底部固定区域
+			<!-- <table class="layui-table"
+				lay-data="{width: 1150, height:500, url:'/Holding/user/getUserList.do', page:true, id:'idTest'}"
+				lay-filter="demo">
+				<thead>
+					<tr>
+						<th lay-data="{type:'checkbox'}">ID</th>
+						<th lay-data="{field:'id', width:80, sort: true}">ID</th>
+						<th
+							lay-data="{field:'userno', width:120, sort: true, edit: 'text'}">用户编号</th>
+						<th lay-data="{field:'name', edit: 'text', minWidth: 150}">用户名</th>
+						<th lay-data="{field:'password', width:80, edit: 'text'}">密码</th>
+						<th lay-data="{field:'imgurl', edit: 'text', minWidth: 100}">头像</th>
+						<th lay-data="{field:'weixin', sort: true, edit: 'text'}">微信</th>
+						<th lay-data="{field:'phone', sort: true, edit: 'text'}">电话</th>
+						<th lay-data="{field:'email', sort: true, edit: 'text'}">邮箱</th>
+						<th lay-data="{fixed: 'right', width:178, align:'center', toolbar: '#barDemo'}"></th>
+					</tr>
+				</thead>
+			</table> -->
+			<!-- <table class="layui-table"
+				lay-data="{url:'/Holding/user/getUserList.do', id:'test3'}"
+				lay-filter="test3">
+				<thead>
+					<tr>
+						<th lay-data="{type:'checkbox'}">ID</th>
+						<th lay-data="{field:'id', width:80, sort: true}">ID</th>
+						<th
+							lay-data="{field:'userno', width:120, sort: true, edit: 'text'}">用户编号</th>
+						<th lay-data="{field:'name', edit: 'text', minWidth: 150}">用户名</th>
+						<th lay-data="{field:'password', width:80, edit: 'text'}">密码</th>
+						<th lay-data="{field:'imgurl', edit: 'text', minWidth: 100}">头像</th>
+						<th lay-data="{field:'weixin', sort: true, edit: 'text'}">微信</th>
+						<th lay-data="{field:'phone', sort: true, edit: 'text'}">电话</th>
+						<th lay-data="{field:'email', sort: true, edit: 'text'}">邮箱</th>
+					</tr>
+				</thead>
+			</table> -->
 		</div>
 	</div>
-	</div>
-	
-	<script src="${basePath }/js/plugins/layui/layui.all.js"></script>
-	
-              
-	
+
+	<script src="${basePath }/js/plugins/layui/layui.js"></script>
+
+
+	<script type="text/html" id="barDemo">
+  		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+  		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+  		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+	</script>
+
 	<script>
 		//JavaScript代码区域
-		;!function() {
+		
+		layui.use('element', function() {
 			var element = layui.element;
-			element.on('nav(test)', function(data){
-				  console.log(this.id); //当前Tab标题所在的原始DOM元素
-				  console.log(data.index); //得到当前Tab的所在下标
-				  console.log(data.elem); //得到当前的Tab大容器
-				});
-		}();
-		function getOnClickItem(menuname) {
-			$.get("/Holding/menu/getsecondmenu.do?menuname=" + menuname);
-		}
+		});
+		layui.use('table', function(){
+			  var table = layui.table;
+			  //监听表格复选框选择
+			  table.on('checkbox(demo)', function(obj){
+			    console.log(obj)
+			  });
+			  //监听工具条
+			  table.on('tool(demo)', function(obj){
+			    var data = obj.data;
+			    if(obj.event === 'detail'){
+			      layer.msg('ID：'+ data.id + ' 的查看操作');
+			    } else if(obj.event === 'del'){
+			      layer.confirm('真的删除行么', function(index){
+			        obj.del();
+			        layer.close(index);
+			      });
+			    } else if(obj.event === 'edit'){
+			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+			    }
+			  });
+			  
+			  var $ = layui.$, active = {
+			    getCheckData: function(){ //获取选中数据
+			      var checkStatus = table.checkStatus('idTest')
+			      ,data = checkStatus.data;
+			      layer.alert(JSON.stringify(data));
+			    }
+			    ,getCheckLength: function(){ //获取选中数目
+			      var checkStatus = table.checkStatus('idTest')
+			      ,data = checkStatus.data;
+			      layer.msg('选中了：'+ data.length + ' 个');
+			    }
+			    ,isAll: function(){ //验证是否全选
+			      var checkStatus = table.checkStatus('idTest');
+			      layer.msg(checkStatus.isAll ? '全选': '未全选')
+			    }
+			  };
+			  
+			  $('.demoTable .layui-btn').on('click', function(){
+			    var type = $(this).data('type');
+			    active[type] ? active[type].call(this) : '';
+			  });
+			});
 	</script>
 </body>
 </html>

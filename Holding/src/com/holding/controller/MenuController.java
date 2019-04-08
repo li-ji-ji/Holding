@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.holding.po.Menu;
 import com.holding.service.MenuService;
+import com.holding.utils.LayUIJSON;
 import com.holding.vm.MenuVM;
 
 @Controller
@@ -47,10 +49,14 @@ public class MenuController {
 	 * session.setAttribute("secondMenu", secondMenu); return
 	 * "menu/BackgroundMainPage"; }
 	 */
+	 
+	 
 	 @RequestMapping("/addmenu.do")
 	 public String addMenu(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
 		 
 		 return "menu/BackgroundMainPage";
 		 
 	 }
+	 
+	 
 }

@@ -1,11 +1,13 @@
 package com.holding.service.impl;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.holding.mapper.MenuMapper;
 import com.holding.po.Menu;
@@ -60,7 +62,40 @@ public class MenuServiceImpl implements MenuService {
 		
 		
 	}
-	
+
+
+
+	@Override
+	public List<Menu> getAll() throws Exception {
+		// TODO Auto-generated method stub
+		return menuMapper.selectByExample(null);
+	}
+
+
+	@Override
+	public void insertMenu(Menu menu) throws SQLException{
+		// TODO Auto-generated method stub
+		menuMapper.insertSelective(menu);
+	}
+
+
+
+	@Override
+	public void deleteMenu(Integer menuid) throws SQLException {
+		// TODO Auto-generated method stub
+		menuMapper.deleteByPrimaryKey(menuid);
+	}
+
+
+
+	@Override
+	public void updateMenu(Integer menuid, Menu menu) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	
 
 }
