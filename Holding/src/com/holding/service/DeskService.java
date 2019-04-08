@@ -12,7 +12,7 @@ import com.holding.vm.DeskVm;
 @Service
 public interface DeskService {
 
-	public List<DeskCListVm> getDeskVmList(int roomId);
+	public List<DeskCListVm> getDeskCListVmListByroomId(int roomId);
 	
 	public DeskVm getDeskVmById(int deskId,int seatId);
 	

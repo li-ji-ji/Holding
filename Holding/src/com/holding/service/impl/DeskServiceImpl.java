@@ -27,7 +27,7 @@ public class DeskServiceImpl implements DeskService {
 	private SeatService seatService;
 	
 	@Override
-	public List<DeskCListVm> getDeskVmList(int roomId) {
+	public List<DeskCListVm> getDeskCListVmListByroomId(int roomId) {
 		DeskExample deskExample = new DeskExample();
 		DeskExample.Criteria dCriteria = deskExample.createCriteria();
 		dCriteria.andRoomidEqualTo(roomId);
@@ -52,6 +52,7 @@ public class DeskServiceImpl implements DeskService {
 		return deskVms;
 	}
 
+	//用于定位位置
 	@Override
 	public DeskVm getDeskVmById(int deskId,int seatId) {
 		DeskVm deskVm = new DeskVm();
@@ -59,10 +60,25 @@ public class DeskServiceImpl implements DeskService {
 		Seat seat = seatService.getSeatById(seatId);
 		deskVm.setSeat(seat);
 		deskVm.setId(desk.getId());
-		//...װ���װ��
+		deskVm.setName(desk.getName());
+		deskVm.setRoomid(desk.getRoomid());
+		deskVm.setWidth(desk.getWidth());
+		deskVm.setHeight(desk.getHeight());
+		deskVm.setXaxis(desk.getXaxis());
+		deskVm.setYaxis(desk.getYaxis());
+		deskVm.setXmaxnum(desk.getXmaxnum());
+		deskVm.setYmaxnum(desk.getYmaxnum());
+		deskVm.setStatus(desk.getStatus());
 		return deskVm;
 	}
 
+	@Override
+	public List<Desk> getDeskListByRoomId(int roomId) {
+		DeskExample deskExample = new DeskExample();
+		DeskExample.Criteria dCriteria = deskExample.createCriteria();
+		dCriteria.andRoomidEqualTo(roomId);
+		return deskMapper.selectByExample(deskExample);
+	}
 	
 	
 	@Override
@@ -98,14 +114,6 @@ public class DeskServiceImpl implements DeskService {
 		} catch (Exception e) {
 			throw new SQLException("修改失败");
 		}
-	}
-
-	@Override
-	public List<Desk> getDeskListByRoomId(int roomId) {
-		DeskExample deskExample = new DeskExample();
-		DeskExample.Criteria dCriteria = deskExample.createCriteria();
-		dCriteria.andRoomidEqualTo(roomId);
-		return deskMapper.selectByExample(deskExample);
 	}
 
 }

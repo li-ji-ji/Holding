@@ -23,7 +23,7 @@ public class RoomServiceImpl implements RoomService {
 	private RoomMapper roomMapper;
 	
 	@Override
-	public List<Room> getRoomList(int floorId) {
+	public List<Room> getRoomListByFloorId(int floorId) {
 		RoomExample roomExample = new RoomExample();
 		RoomExample.Criteria rCriteria = roomExample.createCriteria();
 		rCriteria.andFlooridEqualTo(floorId);
@@ -42,7 +42,7 @@ public class RoomServiceImpl implements RoomService {
 		roomVm.setId(room.getId());
 		return roomVm;
 	}
-
+	
 	@Override
 	public void insertRoom(Room room) throws SQLException {
 		try {
@@ -77,14 +77,6 @@ public class RoomServiceImpl implements RoomService {
 		} catch (Exception e) {
 			throw new SQLException("修改失败");
 		}
-	}
-
-	@Override
-	public List<Room> getRoomListByfloorId(int floorId) {
-		RoomExample roomExample = new RoomExample();
-		RoomExample.Criteria rCriteria = roomExample.createCriteria();
-		rCriteria.andFlooridEqualTo(floorId);
-		return roomMapper.selectByExample(roomExample);
 	}
 
 }

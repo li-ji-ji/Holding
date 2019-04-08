@@ -12,7 +12,7 @@ import com.holding.vm.FloorVm;
 @Service
 public interface FloorService {
 
-	public List<FloorCListVm> getFloorVmList(int libraryId);
+	public List<FloorCListVm> getFloorCListVmListByLibraryId(int libraryId);
 	
 	public FloorVm getFloorVmById(int floorId,int roomId,int deskId,int seatId);
 	

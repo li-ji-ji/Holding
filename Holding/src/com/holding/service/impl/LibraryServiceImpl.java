@@ -2,7 +2,9 @@ package com.holding.service.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,7 @@ public class LibraryServiceImpl implements LibraryService{
 	@Autowired
 	private FloorService floorService;
 	
-	//��ȡԤԼ��λ��Ϣ
+	
 	@Override
 	public LibraryVm getLibraryVmById(int libraryId, int floorId, int roomId, int deskId, int seatId) {
 		LibraryVm libraryVm = new LibraryVm();
@@ -48,16 +50,22 @@ public class LibraryServiceImpl implements LibraryService{
 	}
 
 	@Override
-	public void insertLibrary(Library library) throws SQLException {
+	public Map<String, Object> insertLibrary(Library library) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		try {
 			libraryMapper.insertSelective(library);
+			msg.put("success", true);
+			msg.put("msg", "添加成功");
 		} catch (Exception e) {
-			throw new SQLException("添加失败");
+			msg.put("success", false);
+			msg.put("msg", "添加失败");
 		}
+		return msg;
 	}
 
 	@Override
-	public void deleteLibrary(List<Integer> libraryIds) throws SQLException {
+	public Map<String, Object> deleteLibrary(List<Integer> libraryIds) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		for (int libraryId : libraryIds) {
 			try {
 				List<Floor> floors = floorService.getFloorListBylibraryId(libraryId);
@@ -67,19 +75,28 @@ public class LibraryServiceImpl implements LibraryService{
 				}
 				floorService.deleteFloor(floorIds);
 				libraryMapper.deleteByPrimaryKey(libraryId);
+				msg.put("success", true);
+				msg.put("msg", "添加成功");
 			} catch (Exception e) {
-				throw new SQLException("删除失败");
+				msg.put("success", false);
+				msg.put("msg", "添加失败");
 			}
 		}
+		return msg;
 	}
 
 	@Override
-	public void updateLibrary(Library library) throws SQLException {
+	public Map<String, Object> updateLibrary(Library library) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		try {
 			libraryMapper.updateByPrimaryKeySelective(library);
+			msg.put("success", true);
+			msg.put("msg", "添加成功");
 		} catch (Exception e) {
-			throw new SQLException("修改失败");
+			msg.put("success", false);
+			msg.put("msg", "添加失败");
 		}
+		return msg;
 	}
 	
 	

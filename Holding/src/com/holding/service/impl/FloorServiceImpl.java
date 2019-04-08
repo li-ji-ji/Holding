@@ -27,12 +27,11 @@ public class FloorServiceImpl implements FloorService {
 	
 	
 	@Override
-	public List<FloorCListVm> getFloorVmList(int libraryId) {
+	public List<FloorCListVm> getFloorCListVmListByLibraryId(int libraryId) {
 		FloorExample floorExample = new FloorExample();
 		FloorExample.Criteria fcriteria = floorExample.createCriteria();
 		fcriteria.andLibraryidEqualTo(libraryId);
-		List<Floor> floors = floorMapper.selectByExample(floorExample);//�õ�¥���б�
-		// ¥���װ���б�
+		List<Floor> floors = floorMapper.selectByExample(floorExample);
 		List<FloorCListVm> floorVms = new ArrayList<>();
 		for (Floor floor : floors) {
 			FloorCListVm floorVm = new FloorCListVm();
@@ -40,7 +39,7 @@ public class FloorServiceImpl implements FloorService {
 			floorVm.setLibraryid(floor.getLibraryid());
 			floorVm.setName(floor.getName());
 			floorVm.setStatus(floor.getStatus());
-			List<Room> rooms = roomService.getRoomList(floor.getId());
+			List<Room> rooms = roomService.getRoomListByFloorId(floor.getId());
 			floorVm.setRooms(rooms);
 			floorVms.add(floorVm);
 		}
@@ -53,7 +52,6 @@ public class FloorServiceImpl implements FloorService {
 		RoomVm roomVm = roomService.getRoomVmById(roomId, deskId, seatId);
 		floorVm.setRoomVm(roomVm);
 		Floor floor = new Floor();
-		
 		floorVm.setId(floor.getId());
 		return floorVm;
 	}
@@ -71,7 +69,7 @@ public class FloorServiceImpl implements FloorService {
 	public void deleteFloor(List<Integer> floorIds) throws SQLException {
 		for (int floorId : floorIds) {
 			try {
-				List<Room> rooms = roomService.getRoomList(floorId);
+				List<Room> rooms = roomService.getRoomListByFloorId(floorId);
 				List<Integer> roomIds = new ArrayList<>();
 				for (Room room : rooms) {
 					roomIds.add(room.getId());

@@ -2,6 +2,7 @@ package com.holding.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,9 @@ public interface LibraryService {
 	
 	public LibraryVm getLibraryVmById(int libraryId,int floorId,int roomId,int deskId,int seatId);
 
-	public void insertLibrary(Library library) throws SQLException;
+	public Map<String, Object> insertLibrary(Library library) throws SQLException;
 	
-	public void deleteLibrary(List<Integer> libraryIds) throws SQLException;
+	public Map<String, Object> deleteLibrary(List<Integer> libraryIds) throws SQLException;
 	
-	public void updateLibrary(Library library) throws SQLException;
+	public Map<String, Object> updateLibrary(Library library) throws SQLException;
 }
