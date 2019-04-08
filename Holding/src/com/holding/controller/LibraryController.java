@@ -3,16 +3,17 @@ package com.holding.controller;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.holding.po.Library;
 import com.holding.service.LibraryService;
 import com.holding.vm.LibraryVm;
-import com.sun.javafx.collections.MappingChange.Map;
-
+@CrossOrigin
 @RestController
 @RequestMapping("/library")
 public class LibraryController {
@@ -32,26 +33,23 @@ public class LibraryController {
 		return libraryService.getLibraryVmById(libraryId, floorId, roomId, deskId, seatId);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/insertLibrary.do")
 	public Map<String, Object> addLibrary(Library library) throws SQLException{
-		return (Map<String, Object>) libraryService.insertLibrary(library);
+		return libraryService.insertLibrary(library);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/deleteLibrary.do")
 	public Map<String, Object> removeLibrary(int...libraryIds) throws SQLException{
 		List<Integer> ids = new ArrayList<>();
 		for (int libraryId : libraryIds) {
 			ids.add(libraryId);
 		}
-		return (Map<String, Object>) libraryService.deleteLibrary(ids);
+		return libraryService.deleteLibrary(ids);
 	}
 	
-	@SuppressWarnings("unchecked")
 	@RequestMapping("/updateLibrary.do")
 	public Map<String, Object> updateLibrary(Library library) throws SQLException{
-		return (Map<String, Object>) libraryService.updateLibrary(library);
+		return libraryService.updateLibrary(library);
 	}
 	
 }

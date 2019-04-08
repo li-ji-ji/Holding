@@ -40,12 +40,19 @@ public class LibraryServiceImpl implements LibraryService{
 	@Override
 	public LibraryVm getLibraryVmById(int libraryId, int floorId, int roomId, int deskId, int seatId) {
 		LibraryVm libraryVm = new LibraryVm();
-		
 		FloorVm floorVm = floorService.getFloorVmById(floorId, roomId, deskId, seatId);
 		libraryVm.setFloorVm(floorVm);
 		Library library = libraryMapper.selectByPrimaryKey(libraryId);
-		
 		libraryVm.setId(library.getId());
+		libraryVm.setImageurl(library.getImageurl());
+		libraryVm.setAddress(library.getAddress());
+		libraryVm.setCityid(library.getCityid());
+		libraryVm.setLatitude(library.getLatitude());
+		libraryVm.setLongitude(library.getLongitude());
+		libraryVm.setStarttime(library.getStarttime());
+		libraryVm.setEndtime(library.getEndtime());
+		libraryVm.setProvinceid(library.getProvinceid());
+		libraryVm.setStatus(library.getStatus());
 		return libraryVm;
 	}
 
