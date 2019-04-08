@@ -96,6 +96,14 @@ public class MenuServiceImpl implements MenuService {
 
 
 
+	@Override
+	public Menu getMenuByName(String menuname) throws Exception {
+		// TODO Auto-generated method stub
+		return menuMapper.getMenuByname(menuname);
+	}
+
+
+
 	
 
 }

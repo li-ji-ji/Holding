@@ -40,16 +40,16 @@
 			<div class="layui-side-scroll">
 				<!-- 左侧导航区域（可配合layui已有的垂直导航） -->
 				<ul class="layui-nav layui-nav-tree " lay-shrink="all"
-					lay-filter="test">
+					lay-filter="test" >
 					<c:forEach var="menu" items="${menus}">
-						<li class="layui-nav-item" id="" lay-filter="secondemenu"><a
+						<li class="layui-nav-item" id="" lay-filter=""><a
 							class="" href="javascript:;">${menu.menuname} <span
 								class="layui-nav-more"></span>
 						</a>
 							<dl class="layui-nav-child">
 								<c:forEach items="${menu.menus}" var="sub">
 									<dd>
-										<a href="javascript:;">${sub.menuname}</a>
+										<a class="secondmenu" href="javascript:;" onclick="getid(this.id)" id="${sub.menuname}"  lay-filter="menuname">${sub.menuname}</a>
 									</dd>
 								</c:forEach>
 							</dl> <%--
@@ -70,7 +70,7 @@
 		
 		</div>
 		<div class="layui-body">
-			<iframe src="/Holding/user/getUserTable.do" width="100%" height="100%"></iframe>
+			<iframe id="data-table"  src="" width="100%" height="100%"></iframe>
 
 			<!-- <table class="layui-table"
 				lay-data="{width: 1150, height:500, url:'/Holding/user/getUserList.do', page:true, id:'idTest'}"
@@ -124,55 +124,28 @@
 	<script>
 		//JavaScript代码区域
 		
+		function getid(id) {
+			console.log(id);
+			/* function getMenuUrl() {
+				$("#data-table").attr("src", '/Holding/menu/getMenuUrlByMenuname.do');
+			} */
+			$.ajax({
+				"url": "/Holding/menu/getMenuUrlByMenuname.do",
+				"data": "menuname="+id,
+				"type": "POST",
+				"dataType": "text",
+				"success": getMenuUrl
+			});
+			/*  $("#data-table").attr("src", '/MenuTable.jsp');  */
+		}
+		
 		layui.use('element', function() {
 			var element = layui.element;
-			element.on('nav(all)', function () {
-				console.log();
-			});
-		});
-		layui.use('table', function(){
-			  var table = layui.table;
-			  //监听表格复选框选择
-			  table.on('checkbox(demo)', function(obj){
-			    console.log(obj)
-			  });
-			  //监听工具条
-			  table.on('tool(demo)', function(obj){
-			    var data = obj.data;
-			    if(obj.event === 'detail'){
-			      layer.msg('ID：'+ data.id + ' 的查看操作');
-			    } else if(obj.event === 'del'){
-			      layer.confirm('真的删除行么', function(index){
-			        obj.del();
-			        layer.close(index);
-			      });
-			    } else if(obj.event === 'edit'){
-			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
-			    }
-			  });
-			  
-			  var $ = layui.$, active = {
-			    getCheckData: function(){ //获取选中数据
-			      var checkStatus = table.checkStatus('idTest')
-			      ,data = checkStatus.data;
-			      layer.alert(JSON.stringify(data));
-			    }
-			    ,getCheckLength: function(){ //获取选中数目
-			      var checkStatus = table.checkStatus('idTest')
-			      ,data = checkStatus.data;
-			      layer.msg('选中了：'+ data.length + ' 个');
-			    }
-			    ,isAll: function(){ //验证是否全选
-			      var checkStatus = table.checkStatus('idTest');
-			      layer.msg(checkStatus.isAll ? '全选': '未全选')
-			    }
-			  };
-			  
-			  $('.demoTable .layui-btn').on('click', function(){
-			    var type = $(this).data('type');
-			    active[type] ? active[type].call(this) : '';
-			  });
-			});
+			element.on('nav(test)', function(data){
+				  console.log(data); //得到当前点击的DOM对象
+				  
+				});
+		});		
 	</script>
 </body>
 </html>
