@@ -2,8 +2,11 @@ package com.holding.mapper;
 
 import com.holding.po.User;
 import com.holding.po.UserExample;
+
+import java.sql.SQLException;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface UserMapper {
     long countByExample(UserExample example);
@@ -27,4 +30,8 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    
+    //根据用户名查找用户信息
+    @Select("select * from user where name=#{name}")
+    User selectUserByName(String name) throws SQLException;
 }
