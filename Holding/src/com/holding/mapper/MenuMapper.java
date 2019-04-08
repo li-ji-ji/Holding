@@ -4,6 +4,7 @@ import com.holding.po.Menu;
 import com.holding.po.MenuExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface MenuMapper {
     long countByExample(MenuExample example);
@@ -27,4 +28,8 @@ public interface MenuMapper {
     int updateByPrimaryKeySelective(Menu record);
 
     int updateByPrimaryKey(Menu record);
+    
+    //根据菜单名搜索菜单
+    @Select("select * from menu where menuname=#{menuname}")
+    Menu getMenuByname(String menuname) throws Exception;
 }

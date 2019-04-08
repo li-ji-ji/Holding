@@ -30,6 +30,9 @@ public interface MenuService {
 	//根据已获得一级菜单id查询二级菜单
 	List<MenuVM> getAllMenuByMid()throws Exception;
 	
+	//根据菜单名获取菜单
+	Menu getMenuByName(String menuname) throws Exception;
+	
 	//插入新菜单
 	void insertMenu(Menu menu)throws SQLException;
 	

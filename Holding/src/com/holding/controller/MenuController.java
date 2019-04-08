@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.holding.po.Menu;
 import com.holding.service.MenuService;
 import com.holding.vm.MenuVM;
 
@@ -45,6 +47,16 @@ public class MenuController {
 	 * "menu/BackgroundMainPage"; }
 	 */
 	 
+	 @RequestMapping("/getMenuUrlByMenuname.do")
+	 @ResponseBody
+	 public String  getMenuUrlByMenuname(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		String menuName=(String) request.getParameter("menuname");
+		System.out.println("获取到的菜单名："+menuName);
+		Menu menu=menuService.getMenuByName(menuName);
+		System.out.println("获取到的菜单："+menu);
+		return menu.getUrl();
+		 
+	 }
 	 
 	 @RequestMapping("/addmenu.do")
 	 public String addMenu(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
