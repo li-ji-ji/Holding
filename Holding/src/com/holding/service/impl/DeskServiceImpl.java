@@ -2,7 +2,9 @@ package com.holding.service.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -82,16 +84,22 @@ public class DeskServiceImpl implements DeskService {
 	
 	
 	@Override
-	public void insertDesk(Desk desk) throws SQLException {
+	public Map<String, Object> insertDesk(Desk desk) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		try {
 			deskMapper.insert(desk);
+			msg.put("success", true);
+			msg.put("msg", "添加成功");
 		} catch (Exception e) {
-			throw new SQLException("添加失败");
+			msg.put("success", false);
+			msg.put("msg", "添加失败");
 		}
+		return msg;
 	}
 	
 	@Override
-	public void deleteDesk(List<Integer> deskIds) throws SQLException {
+	public Map<String, Object> deleteDesk(List<Integer> deskIds) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		for (int deskId : deskIds) {
 			try {
 				List<Seat> seats = seatService.getSeatListBydeskId(deskId);
@@ -101,19 +109,28 @@ public class DeskServiceImpl implements DeskService {
 				}
 				seatService.deleteSeatById(seatIds);
 				deskMapper.deleteByPrimaryKey(deskId);
+				msg.put("success", true);
+				msg.put("msg", "删除成功");
 			} catch (Exception e) {
-				throw new SQLException("删除失败");
+				msg.put("success", false);
+				msg.put("msg", "删除失败");
 			}
 		}
+		return msg;
 	}
 
 	@Override
-	public void updateDesk(Desk desk) throws SQLException {
+	public Map<String, Object> updateDesk(Desk desk) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		try {
 			deskMapper.updateByPrimaryKeySelective(desk);
+			msg.put("success", true);
+			msg.put("msg", "修改成功");
 		} catch (Exception e) {
-			throw new SQLException("修改失败");
+			msg.put("success", false);
+			msg.put("msg", "修改失败");
 		}
+		return msg;
 	}
 
 }

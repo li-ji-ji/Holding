@@ -9,3 +9,9 @@ http://localhost:8080/Holding/floor/getFloorCListVmListByLibraryId.do?libraryId=
 
 通过自习室id获取自习室中的座子列表及每张座子的座位列表
 http://localhost:8080/Holding/desk/getDeskCListVmListByroomId.do?roomId=1
+
+通过可变id删除位置
+http://localhost:8080/Holding/seat/deleteLibrary.do?seatIds=2,3
+
+修改位置（id必须传）
+localhost:8080/Holding/seat//updateLibrary.do?floorid=2&roomid=1

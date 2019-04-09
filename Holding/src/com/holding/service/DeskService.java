@@ -2,6 +2,7 @@ package com.holding.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -18,9 +19,9 @@ public interface DeskService {
 	
 	public List<Desk> getDeskListByRoomId(int roomId);
 	
-	public void insertDesk(Desk desk) throws SQLException;
+	public Map<String, Object> insertDesk(Desk desk) throws SQLException;
 	
-	public void deleteDesk(List<Integer> deskIds) throws SQLException;
+	public Map<String, Object> deleteDesk(List<Integer> deskIds) throws SQLException;
 	
-	public void updateDesk(Desk desk) throws SQLException;
+	public Map<String, Object> updateDesk(Desk desk) throws SQLException;
 }
