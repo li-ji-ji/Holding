@@ -13,7 +13,7 @@
 </head>
 <body>
 	<table class="layui-table"
-				lay-data="{width: 1100, height:500, url:'/Holding/api/menu/getMenuList.do', page:true, id:'idTest'}"
+				lay-data="{width: 1100, height:500, url:'/Holding/menu/getMenuList.do', page:true, id:'idTest'}"
 				lay-filter="demo">
 				<thead>
 					<tr>

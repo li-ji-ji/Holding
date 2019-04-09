@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.holding.po.Menu;
 import com.holding.service.MenuService;
+import com.holding.utils.LayUIJSON;
 import com.holding.vm.MenuVM;
 @CrossOrigin
 @Controller
@@ -47,6 +48,20 @@ public class MenuController {
 	 * session.setAttribute("secondMenu", secondMenu); return
 	 * "menu/BackgroundMainPage"; }
 	 */
+	 
+	 @RequestMapping("/getMenuList.do")
+	 @ResponseBody
+	 public LayUIJSON getMenuList() throws Exception{
+		 LayUIJSON layUIJSON=new LayUIJSON();
+		 layUIJSON.setData(menuService.getAll());
+		 System.out.println(layUIJSON);
+		 return layUIJSON;
+	 }
+	 
+	 @RequestMapping("/getMenuTable.do")
+		public String getUserTable() throws Exception{
+			return "menu/MenuTable";
+		}
 	 
 	 @RequestMapping("/getMenuUrlByMenuname.do")
 	 @ResponseBody

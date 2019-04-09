@@ -34,11 +34,10 @@ public class MenuAPI {
 		return menuService.getAll();
 	}
 	
-	@RequestMapping("/getMenuList.do")
-	 public LayUIJSON getMenuList() throws Exception{
-		 LayUIJSON layUIJSON=new LayUIJSON();
-		 layUIJSON.setData(menuService.getAll());
-		 System.out.println(layUIJSON);
-		 return layUIJSON;
-	 }
+	/*
+	 * @RequestMapping("/getMenuList.do") public LayUIJSON getMenuList() throws
+	 * Exception{ LayUIJSON layUIJSON=new LayUIJSON();
+	 * layUIJSON.setData(menuService.getAll()); System.out.println(layUIJSON);
+	 * return layUIJSON; }
+	 */
 }
