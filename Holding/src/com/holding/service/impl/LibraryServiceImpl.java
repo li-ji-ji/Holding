@@ -83,10 +83,10 @@ public class LibraryServiceImpl implements LibraryService{
 				floorService.deleteFloor(floorIds);
 				libraryMapper.deleteByPrimaryKey(libraryId);
 				msg.put("success", true);
-				msg.put("msg", "添加成功");
+				msg.put("msg", "删除成功");
 			} catch (Exception e) {
 				msg.put("success", false);
-				msg.put("msg", "添加失败");
+				msg.put("msg", "删除失败");
 			}
 		}
 		return msg;
