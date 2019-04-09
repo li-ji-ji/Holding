@@ -30,7 +30,9 @@ public class LibraryServiceImpl implements LibraryService{
 		LibraryExample.Criteria criteria = libraryExample.createCriteria();
 		criteria.andProvinceidEqualTo(provinceId);
 		criteria.andCityidEqualTo(cityId);
-		return libraryMapper.selectByExample(libraryExample);
+		List<Library> libraries = libraryMapper.selectByExample(libraryExample);
+		System.out.println(libraries);
+		return libraries;
 	}
 
 	@Autowired
