@@ -32,13 +32,15 @@
 
 
 	<script type="text/html" id="barDemo">
-  		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script>
 
 	<script>
 		//JavaScript代码区域
+		function getid(id) {
+			console.log(id);
+		};
 		
 		layui.use('element', function() {
 			var element = layui.element;
@@ -61,7 +63,8 @@
 			        layer.close(index);
 			      });
 			    } else if(obj.event === 'edit'){
-			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+			      layer.alert(data.menuname)
+			      
 			    }
 			  });
 			  

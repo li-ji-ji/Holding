@@ -126,15 +126,19 @@
 		
 		function getid(id) {
 			console.log(id);
-			/* function getMenuUrl() {
-				$("#data-table").attr("src", '/Holding/menu/getMenuUrlByMenuname.do');
-			} */
+			 function getMenuUrl(url) {
+				 console.log(url);
+				$("#data-table").attr("src", url);
+			} 
 			$.ajax({
 				"url": "/Holding/menu/getMenuUrlByMenuname.do",
 				"data": "menuname="+id,
 				"type": "POST",
+				"async": true,
 				"dataType": "text",
-				"success": getMenuUrl
+				"success": function (url) {
+							getMenuUrl(url);			
+						}
 			});
 			/*  $("#data-table").attr("src", '/MenuTable.jsp');  */
 		}
