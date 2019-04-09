@@ -2,6 +2,8 @@ package com.holding.po;
 
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Library {
     private Integer id;
 
@@ -17,8 +19,10 @@ public class Library {
 
     private String address;
 
+    @DateTimeFormat(pattern="HH:mm:ss")
     private Date starttime;
 
+    @DateTimeFormat(pattern="HH:mm:ss")
     private Date endtime;
 
     private Integer status;

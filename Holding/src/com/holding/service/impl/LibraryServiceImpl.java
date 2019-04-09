@@ -98,10 +98,10 @@ public class LibraryServiceImpl implements LibraryService{
 		try {
 			libraryMapper.updateByPrimaryKeySelective(library);
 			msg.put("success", true);
-			msg.put("msg", "添加成功");
+			msg.put("msg", "修改成功");
 		} catch (Exception e) {
 			msg.put("success", false);
-			msg.put("msg", "添加失败");
+			msg.put("msg", "修改失败");
 		}
 		return msg;
 	}
