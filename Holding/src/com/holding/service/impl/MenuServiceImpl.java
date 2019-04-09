@@ -104,6 +104,21 @@ public class MenuServiceImpl implements MenuService {
 
 
 
+	//根据菜单名删除菜单
+	@Override
+	public int deleteMenuByName(String menuName) throws SQLException {
+		// TODO Auto-generated method stub
+		try {
+			menuMapper.deleteMenuByName(menuName);
+		} catch (Exception e) {
+			System.out.println("删除失败");
+			return 0;
+		}
+		return 1;
+	}
+
+
+
 	
 
 }

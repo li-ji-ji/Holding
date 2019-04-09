@@ -41,7 +41,6 @@
 		function getid(id) {
 			console.log(id);
 		};
-		
 		layui.use('element', function() {
 			var element = layui.element;
 
@@ -60,11 +59,12 @@
 			    } else if(obj.event === 'del'){
 			      layer.confirm('真的删除行么', function(index){
 			        obj.del();
+			        $.get("/Holding/menu/deleteMenuByName.do?menuname="+data.menuname);
 			        layer.close(index);
 			      });
 			    } else if(obj.event === 'edit'){
-			      layer.alert(data.menuname)
-			      
+			      $.get("/Holding/menu/updateMenuByName.do?menuname="+data.menuname);
+			      layer.alert("/Holding/menu/updateMenuByName.do?menuname="+data.menuname);
 			    }
 			  });
 			  

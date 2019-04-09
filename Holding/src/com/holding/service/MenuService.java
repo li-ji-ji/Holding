@@ -21,6 +21,8 @@ public interface MenuService {
 	 * //根据菜单名查询菜单ID(废弃) Integer getMenuId(String menuName) throws Exception;
 	 */
 	
+	
+	/*----------------查询-----------------*/
 	//查询所有菜单
 	List<Menu> getAll() throws Exception;
 	
@@ -30,15 +32,24 @@ public interface MenuService {
 	//根据已获得一级菜单id查询二级菜单
 	List<MenuVM> getAllMenuByMid()throws Exception;
 	
-	//根据菜单名获取菜单
+	//根据菜单名查询菜单
 	Menu getMenuByName(String menuname) throws Exception;
+	/*----------------查询-----------------*/
 	
-	//插入新菜单
-	void insertMenu(Menu menu)throws SQLException;
 	
+	
+	/*----------------删除-----------------*/
 	//删除菜单
 	void deleteMenu(Integer menuid) throws SQLException;
 	
+	//根据菜单名删除菜单
+	int deleteMenuByName(String menuName) throws SQLException;
+	/*----------------删除-----------------*/
+	
+	
+
+	//插入新菜单
+	void insertMenu(Menu menu)throws SQLException;
 	//更新菜单
 	void updateMenu(Integer menuid,Menu menu) throws SQLException;
 }
