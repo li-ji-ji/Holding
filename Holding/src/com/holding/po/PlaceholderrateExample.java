@@ -165,6 +165,66 @@ public class PlaceholderrateExample {
             return (Criteria) this;
         }
 
+        public Criteria andLibraryidIsNull() {
+            addCriterion("libraryId is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidIsNotNull() {
+            addCriterion("libraryId is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidEqualTo(Integer value) {
+            addCriterion("libraryId =", value, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidNotEqualTo(Integer value) {
+            addCriterion("libraryId <>", value, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidGreaterThan(Integer value) {
+            addCriterion("libraryId >", value, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("libraryId >=", value, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidLessThan(Integer value) {
+            addCriterion("libraryId <", value, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidLessThanOrEqualTo(Integer value) {
+            addCriterion("libraryId <=", value, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidIn(List<Integer> values) {
+            addCriterion("libraryId in", values, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidNotIn(List<Integer> values) {
+            addCriterion("libraryId not in", values, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidBetween(Integer value1, Integer value2) {
+            addCriterion("libraryId between", value1, value2, "libraryid");
+            return (Criteria) this;
+        }
+
+        public Criteria andLibraryidNotBetween(Integer value1, Integer value2) {
+            addCriterion("libraryId not between", value1, value2, "libraryid");
+            return (Criteria) this;
+        }
+
         public Criteria andLlibraryrateIsNull() {
             addCriterion("llibraryRate is null");
             return (Criteria) this;
