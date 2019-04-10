@@ -4,6 +4,7 @@ import com.holding.po.Placeholderrate;
 import com.holding.po.PlaceholderrateExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 public interface PlaceholderrateMapper {
     long countByExample(PlaceholderrateExample example);
@@ -29,4 +30,7 @@ public interface PlaceholderrateMapper {
     int updateByPrimaryKey(Placeholderrate record);
     
     
+    //根据图书馆ID查询最近一条记录
+    @Select("SELECT * from placeholderrate where id = (SELECT max(id) FROM placeholderrate where libraryId=#{libraryId})")
+    Placeholderrate getPlaceholderrateByMaxId(Integer libraryId) throws Exception;
 }
