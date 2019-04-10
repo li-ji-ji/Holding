@@ -7,13 +7,13 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.holding.po.Floor;
-import com.holding.vm.FloorCListVm;
+import com.holding.vm.FloorIncludeChildPercentageListVm;
 import com.holding.vm.FloorVm;
 
 @Service
 public interface FloorService {
 
-	public List<FloorCListVm> getFloorCListVmListByLibraryId(int libraryId);
+	public List<FloorIncludeChildPercentageListVm> getFloorCListVmListByLibraryId(int libraryId);
 	
 	public FloorVm getFloorVmById(int floorId,int roomId,int deskId,int seatId);
 	

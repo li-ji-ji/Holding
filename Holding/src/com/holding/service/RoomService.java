@@ -7,6 +7,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.holding.po.Room;
+import com.holding.vm.RoomIncludePercentageVm;
 import com.holding.vm.RoomVm;
 
 @Service
@@ -15,6 +16,8 @@ public interface RoomService {
 	public List<Room> getRoomListByFloorId(int floorId);
 	
 	public RoomVm getRoomVmById(int roomId,int deskId,int seatId);
+	
+	public List<RoomIncludePercentageVm> getRoomIncludePercentageVmsByFloorId(int floorId);
 	
 	public Map<String, Object> insertRoom(Room room) throws SQLException;
 	

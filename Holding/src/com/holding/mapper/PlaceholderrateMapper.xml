@@ -3,6 +3,7 @@
 <mapper namespace="com.holding.mapper.PlaceholderrateMapper">
   <resultMap id="BaseResultMap" type="com.holding.po.Placeholderrate">
     <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="roomId" jdbcType="INTEGER" property="roomid" />
     <result column="libraryId" jdbcType="INTEGER" property="libraryid" />
     <result column="llibraryRate" jdbcType="DOUBLE" property="llibraryrate" />
     <result column="updateTime" jdbcType="TIMESTAMP" property="updatetime" />
@@ -67,7 +68,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, libraryId, llibraryRate, updateTime, roomRate
+    id, roomId, libraryId, llibraryRate, updateTime, roomRate
   </sql>
   <select id="selectByExample" parameterType="com.holding.po.PlaceholderrateExample" resultMap="BaseResultMap">
     select
@@ -100,16 +101,21 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.holding.po.Placeholderrate">
-    insert into placeholderrate (id, libraryId, llibraryRate, 
-      updateTime, roomRate)
-    values (#{id,jdbcType=INTEGER}, #{libraryid,jdbcType=INTEGER}, #{llibraryrate,jdbcType=DOUBLE}, 
-      #{updatetime,jdbcType=TIMESTAMP}, #{roomrate,jdbcType=DOUBLE})
+    insert into placeholderrate (id, roomId, libraryId, 
+      llibraryRate, updateTime, roomRate
+      )
+    values (#{id,jdbcType=INTEGER}, #{roomid,jdbcType=INTEGER}, #{libraryid,jdbcType=INTEGER}, 
+      #{llibraryrate,jdbcType=DOUBLE}, #{updatetime,jdbcType=TIMESTAMP}, #{roomrate,jdbcType=DOUBLE}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.holding.po.Placeholderrate">
     insert into placeholderrate
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
+      </if>
+      <if test="roomid != null">
+        roomId,
       </if>
       <if test="libraryid != null">
         libraryId,
@@ -127,6 +133,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
         #{id,jdbcType=INTEGER},
+      </if>
+      <if test="roomid != null">
+        #{roomid,jdbcType=INTEGER},
       </if>
       <if test="libraryid != null">
         #{libraryid,jdbcType=INTEGER},
@@ -154,6 +163,9 @@
       <if test="record.id != null">
         id = #{record.id,jdbcType=INTEGER},
       </if>
+      <if test="record.roomid != null">
+        roomId = #{record.roomid,jdbcType=INTEGER},
+      </if>
       <if test="record.libraryid != null">
         libraryId = #{record.libraryid,jdbcType=INTEGER},
       </if>
@@ -174,6 +186,7 @@
   <update id="updateByExample" parameterType="map">
     update placeholderrate
     set id = #{record.id,jdbcType=INTEGER},
+      roomId = #{record.roomid,jdbcType=INTEGER},
       libraryId = #{record.libraryid,jdbcType=INTEGER},
       llibraryRate = #{record.llibraryrate,jdbcType=DOUBLE},
       updateTime = #{record.updatetime,jdbcType=TIMESTAMP},
@@ -185,6 +198,9 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.holding.po.Placeholderrate">
     update placeholderrate
     <set>
+      <if test="roomid != null">
+        roomId = #{roomid,jdbcType=INTEGER},
+      </if>
       <if test="libraryid != null">
         libraryId = #{libraryid,jdbcType=INTEGER},
       </if>
@@ -202,7 +218,8 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.holding.po.Placeholderrate">
     update placeholderrate
-    set libraryId = #{libraryid,jdbcType=INTEGER},
+    set roomId = #{roomid,jdbcType=INTEGER},
+      libraryId = #{libraryid,jdbcType=INTEGER},
       llibraryRate = #{llibraryrate,jdbcType=DOUBLE},
       updateTime = #{updatetime,jdbcType=TIMESTAMP},
       roomRate = #{roomrate,jdbcType=DOUBLE}

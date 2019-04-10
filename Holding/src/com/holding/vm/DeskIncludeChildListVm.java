@@ -5,7 +5,7 @@ import java.util.List;
 import com.holding.po.Desk;
 import com.holding.po.Seat;
 
-public class DeskCListVm extends Desk{
+public class DeskIncludeChildListVm extends Desk{
 
 	private List<Seat> seat;
 

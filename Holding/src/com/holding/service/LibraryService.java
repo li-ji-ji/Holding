@@ -7,11 +7,14 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.holding.po.Library;
+import com.holding.vm.LibraryIncludePercentageVm;
 import com.holding.vm.LibraryVm;
 
 @Service
 public interface LibraryService {
 
+	public List<LibraryIncludePercentageVm> getLibraryIncludePercentageVmList(int provinceId,int cityId);
+	
 	public List<Library> getLibraryList(int provinceId,int cityId);
 	
 	public LibraryVm getLibraryVmById(int libraryId,int floorId,int roomId,int deskId,int seatId);

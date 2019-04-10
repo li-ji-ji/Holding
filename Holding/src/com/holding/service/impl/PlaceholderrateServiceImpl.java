@@ -48,5 +48,11 @@ public class PlaceholderrateServiceImpl implements PlaceholderrateService {
 		}
 		return 0;
 	}
+	
+	//根据图书馆名称查询最新记录
+	@Override
+	public Placeholderrate getLastestByLibraryid(Integer libraryId) throws Exception {
+		return placeholderrateMapper.getPlaceholderrateByMaxId(libraryId);
+	}
 
 }

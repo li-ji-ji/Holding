@@ -7,13 +7,13 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.holding.po.Desk;
-import com.holding.vm.DeskCListVm;
+import com.holding.vm.DeskIncludeChildListVm;
 import com.holding.vm.DeskVm;
 
 @Service
 public interface DeskService {
 
-	public List<DeskCListVm> getDeskCListVmListByroomId(int roomId);
+	public List<DeskIncludeChildListVm> getDeskCListVmListByroomId(int roomId);
 	
 	public DeskVm getDeskVmById(int deskId,int seatId);
 	

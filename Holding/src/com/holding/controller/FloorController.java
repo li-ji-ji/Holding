@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.holding.po.Floor;
 import com.holding.service.FloorService;
-import com.holding.vm.FloorCListVm;
+import com.holding.vm.FloorIncludeChildPercentageListVm;
 @CrossOrigin
 @RestController
 @RequestMapping("/floor")
@@ -22,7 +22,7 @@ public class FloorController {
 	private FloorService floorService;
 	
 	@RequestMapping("/getFloorCListVmListByLibraryId.do")
-	public List<FloorCListVm> getFloorCListVmListByLibraryId(int libraryId){
+	public List<FloorIncludeChildPercentageListVm> getFloorCListVmListByLibraryId(int libraryId){
 		return floorService.getFloorCListVmListByLibraryId(libraryId);
 	}
 	

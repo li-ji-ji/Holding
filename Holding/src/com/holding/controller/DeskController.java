@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.holding.po.Desk;
 import com.holding.service.DeskService;
-import com.holding.vm.DeskCListVm;
+import com.holding.vm.DeskIncludeChildListVm;
 
 @CrossOrigin
 @RestController
@@ -24,7 +24,7 @@ public class DeskController {
 	private DeskService deskService;
 	
 	@RequestMapping("/getDeskCListVmListByroomId.do")
-	private List<DeskCListVm> getDeskCListVmListByroomId(int roomId) {
+	private List<DeskIncludeChildListVm> getDeskCListVmListByroomId(int roomId) {
 		return deskService.getDeskCListVmListByroomId(roomId);
 	}
 	

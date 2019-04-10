@@ -16,7 +16,7 @@ import com.holding.po.DeskExample;
 import com.holding.po.Seat;
 import com.holding.service.DeskService;
 import com.holding.service.SeatService;
-import com.holding.vm.DeskCListVm;
+import com.holding.vm.DeskIncludeChildListVm;
 import com.holding.vm.DeskVm;
 
 @Service
@@ -29,14 +29,14 @@ public class DeskServiceImpl implements DeskService {
 	private SeatService seatService;
 	
 	@Override
-	public List<DeskCListVm> getDeskCListVmListByroomId(int roomId) {
+	public List<DeskIncludeChildListVm> getDeskCListVmListByroomId(int roomId) {
 		DeskExample deskExample = new DeskExample();
 		DeskExample.Criteria dCriteria = deskExample.createCriteria();
 		dCriteria.andRoomidEqualTo(roomId);
 		List<Desk> desks = deskMapper.selectByExample(deskExample);
-		List<DeskCListVm> deskVms = new ArrayList<>();
+		List<DeskIncludeChildListVm> deskVms = new ArrayList<>();
 		for (Desk desk : desks) {
-			DeskCListVm deskVm = new DeskCListVm();
+			DeskIncludeChildListVm deskVm = new DeskIncludeChildListVm();
 			deskVm.setId(desk.getId());
 			deskVm.setName(desk.getName());
 			deskVm.setHeight(desk.getHeight());

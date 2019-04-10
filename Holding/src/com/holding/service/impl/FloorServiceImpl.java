@@ -15,8 +15,9 @@ import com.holding.po.FloorExample;
 import com.holding.po.Room;
 import com.holding.service.FloorService;
 import com.holding.service.RoomService;
-import com.holding.vm.FloorCListVm;
+import com.holding.vm.FloorIncludeChildPercentageListVm;
 import com.holding.vm.FloorVm;
+import com.holding.vm.RoomIncludePercentageVm;
 import com.holding.vm.RoomVm;
 
 @Service
@@ -29,23 +30,23 @@ public class FloorServiceImpl implements FloorService {
 	
 	
 	@Override
-	public List<FloorCListVm> getFloorCListVmListByLibraryId(int libraryId) {
+	public List<FloorIncludeChildPercentageListVm> getFloorCListVmListByLibraryId(int libraryId) {
 		FloorExample floorExample = new FloorExample();
 		FloorExample.Criteria fcriteria = floorExample.createCriteria();
 		fcriteria.andLibraryidEqualTo(libraryId);
 		List<Floor> floors = floorMapper.selectByExample(floorExample);
-		List<FloorCListVm> floorVms = new ArrayList<>();
+		List<FloorIncludeChildPercentageListVm> floorCVms = new ArrayList<>();
 		for (Floor floor : floors) {
-			FloorCListVm floorVm = new FloorCListVm();
+			FloorIncludeChildPercentageListVm floorVm = new FloorIncludeChildPercentageListVm();
 			floorVm.setId(floor.getId());
 			floorVm.setLibraryid(floor.getLibraryid());
 			floorVm.setName(floor.getName());
 			floorVm.setStatus(floor.getStatus());
-			List<Room> rooms = roomService.getRoomListByFloorId(floor.getId());
-			floorVm.setRooms(rooms);
-			floorVms.add(floorVm);
+			List<RoomIncludePercentageVm> roomIncludePercentageVms = roomService.getRoomIncludePercentageVmsByFloorId(floor.getId());
+			floorVm.setRoomIncludePercentageVms(roomIncludePercentageVms);
+			floorCVms.add(floorVm);
 		}
-		return floorVms;
+		return floorCVms;
 	}
 	
 	@Override

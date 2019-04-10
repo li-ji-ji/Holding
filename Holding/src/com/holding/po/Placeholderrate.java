@@ -5,6 +5,8 @@ import java.util.Date;
 public class Placeholderrate {
     private Integer id;
 
+    private Integer roomid;
+
     private Integer libraryid;
 
     private Double llibraryrate;
@@ -19,6 +21,14 @@ public class Placeholderrate {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getRoomid() {
+        return roomid;
+    }
+
+    public void setRoomid(Integer roomid) {
+        this.roomid = roomid;
     }
 
     public Integer getLibraryid() {

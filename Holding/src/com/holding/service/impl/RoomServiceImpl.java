@@ -16,6 +16,7 @@ import com.holding.po.RoomExample;
 import com.holding.service.DeskService;
 import com.holding.service.RoomService;
 import com.holding.vm.DeskVm;
+import com.holding.vm.RoomIncludePercentageVm;
 import com.holding.vm.RoomVm;
 
 @Service
@@ -23,31 +24,6 @@ public class RoomServiceImpl implements RoomService {
 
 	@Autowired
 	private RoomMapper roomMapper;
-	
-	@Override
-	public List<Room> getRoomListByFloorId(int floorId) {
-		RoomExample roomExample = new RoomExample();
-		RoomExample.Criteria rCriteria = roomExample.createCriteria();
-		rCriteria.andFlooridEqualTo(floorId);
-		return roomMapper.selectByExample(roomExample);
-	}
-
-	@Autowired
-	private DeskService deskService;
-	
-	@Override
-	public RoomVm getRoomVmById(int roomId, int deskId, int seatId) {
-		RoomVm roomVm = new RoomVm();
-		DeskVm deskVm = deskService.getDeskVmById(deskId, seatId);
-		roomVm.setDeskVm(deskVm);
-		Room room = roomMapper.selectByPrimaryKey(roomId);
-		roomVm.setId(room.getId());
-		roomVm.setFloorid(room.getFloorid());
-		roomVm.setImageurl(room.getImageurl());
-		roomVm.setName(room.getName());
-		roomVm.setStatus(room.getStatus());
-		return roomVm;
-	}
 	
 	@Override
 	public Map<String, Object> insertRoom(Room room) throws SQLException {
@@ -97,6 +73,50 @@ public class RoomServiceImpl implements RoomService {
 			msg.put("msg", "修改失败");
 		}
 		return msg;
+	}
+	
+	@Override
+	public List<Room> getRoomListByFloorId(int floorId) {
+		RoomExample roomExample = new RoomExample();
+		RoomExample.Criteria rCriteria = roomExample.createCriteria();
+		rCriteria.andFlooridEqualTo(floorId);
+		return roomMapper.selectByExample(roomExample);
+	}
+
+	@Autowired
+	private DeskService deskService;
+	
+	@Override
+	public RoomVm getRoomVmById(int roomId, int deskId, int seatId) {
+		RoomVm roomVm = new RoomVm();
+		DeskVm deskVm = deskService.getDeskVmById(deskId, seatId);
+		roomVm.setDeskVm(deskVm);
+		Room room = roomMapper.selectByPrimaryKey(roomId);
+		roomVm.setId(room.getId());
+		roomVm.setFloorid(room.getFloorid());
+		roomVm.setImageurl(room.getImageurl());
+		roomVm.setName(room.getName());
+		roomVm.setStatus(room.getStatus());
+		return roomVm;
+	}
+	
+
+	@Override
+	public List<RoomIncludePercentageVm> getRoomIncludePercentageVmsByFloorId(int floorId) {
+		List<Room> rooms = this.getRoomListByFloorId(floorId);
+		List<RoomIncludePercentageVm> roomIncludePercentageVms = new ArrayList<>();
+		for (Room room : rooms) {
+			RoomIncludePercentageVm roomIncludePercentageVm = new RoomIncludePercentageVm();
+			roomIncludePercentageVm.setId(room.getId());
+			roomIncludePercentageVm.setFloorid(room.getFloorid());
+			roomIncludePercentageVm.setName(room.getName());
+			roomIncludePercentageVm.setImageurl(room.getImageurl());
+			roomIncludePercentageVm.setStatus(room.getStatus());
+			//获取自习室占座率---通过roomId查询最新一条占座率记录
+			roomIncludePercentageVm.setUsageQuantity(0.5);
+			roomIncludePercentageVms.add(roomIncludePercentageVm);
+		}
+		return roomIncludePercentageVms;
 	}
 
 }

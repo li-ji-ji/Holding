@@ -16,6 +16,7 @@ import com.holding.po.LibraryExample;
 import com.holding.service.FloorService;
 import com.holding.service.LibraryService;
 import com.holding.vm.FloorVm;
+import com.holding.vm.LibraryIncludePercentageVm;
 import com.holding.vm.LibraryVm;
 
 @Service
@@ -25,13 +26,34 @@ public class LibraryServiceImpl implements LibraryService{
 	private LibraryMapper libraryMapper;
 
 	@Override
+	public List<LibraryIncludePercentageVm> getLibraryIncludePercentageVmList(int provinceId, int cityId) {
+		List<LibraryIncludePercentageVm> libraryIncludePercentageVms = new ArrayList<>();
+		List<Library> libraries = this.getLibraryList(provinceId, cityId);
+		for (Library library : libraries) {
+			LibraryIncludePercentageVm libraryIncludePercentageVm = new LibraryIncludePercentageVm();
+			libraryIncludePercentageVm.setId(library.getId());
+			libraryIncludePercentageVm.setImageurl(library.getImageurl());
+			libraryIncludePercentageVm.setAddress(library.getAddress());
+			libraryIncludePercentageVm.setCityid(library.getCityid());
+			libraryIncludePercentageVm.setLatitude(library.getLatitude());
+			libraryIncludePercentageVm.setLongitude(library.getLongitude());
+			libraryIncludePercentageVm.setStarttime(library.getStarttime());
+			libraryIncludePercentageVm.setEndtime(library.getEndtime());
+			libraryIncludePercentageVm.setProvinceid(library.getProvinceid());
+			libraryIncludePercentageVm.setStatus(library.getStatus());
+			libraryIncludePercentageVm.setPercentage(0.5);
+			libraryIncludePercentageVms.add(libraryIncludePercentageVm);
+		}
+		return libraryIncludePercentageVms;
+	}
+	
+	@Override
 	public List<Library> getLibraryList(int provinceId, int cityId) {
 		LibraryExample libraryExample = new LibraryExample();
 		LibraryExample.Criteria criteria = libraryExample.createCriteria();
 		criteria.andProvinceidEqualTo(provinceId);
 		criteria.andCityidEqualTo(cityId);
 		List<Library> libraries = libraryMapper.selectByExample(libraryExample);
-		System.out.println(libraries);
 		return libraries;
 	}
 
@@ -107,6 +129,8 @@ public class LibraryServiceImpl implements LibraryService{
 		}
 		return msg;
 	}
+
+	
 	
 	
 	

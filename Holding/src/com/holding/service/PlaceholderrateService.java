@@ -21,4 +21,7 @@ public interface PlaceholderrateService {
 	
 	//根据id删除占座记录
 	int deletePlaceholderrateById(Integer id)throws Exception;
+	
+	//根据图书馆id查询最新记录
+	Placeholderrate getLastestByLibraryid(Integer libraryId)throws Exception; 
 }
