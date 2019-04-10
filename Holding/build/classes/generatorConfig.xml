@@ -33,11 +33,15 @@
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
 
+
+<table tableName="placeholderRate"></table>
+<!-- 
+
 		<table tableName="admin"></table>
 		<table tableName="desk"></table>
 		<table tableName="floor"></table>
 		<table tableName="library"></table>
-		<table tableName="placeholderRate"></table>
+		
 		<table tableName="region"></table>
 		<table tableName="reservation"></table>
 		<table tableName="room"></table>
@@ -45,5 +49,6 @@
 		<table tableName="user"></table>
 		<table tableName="menu"></table>
 
+ -->
 	</context>
 </generatorConfiguration>
