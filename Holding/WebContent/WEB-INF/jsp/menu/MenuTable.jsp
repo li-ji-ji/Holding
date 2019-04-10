@@ -12,9 +12,10 @@
 <script type="text/javascript" src="${basePath }/js/jquery-3.3.1.js"></script>
 </head>
 <body>
-	<table class="layui-table"
+	<table class="layui-table" 
 				lay-data="{width: 1100, height:500, url:'/Holding/menu/getMenuList.do', page:true, id:'idTest'}"
 				lay-filter="demo">
+				
 				<thead>
 					<tr>
 						<th lay-data="{type:'checkbox'}">ID</th>
@@ -45,8 +46,10 @@
 			var element = layui.element;
 
 		});
+		
 		layui.use('table', function(){
 			  var table = layui.table;
+			  
 			  //监听表格复选框选择
 			  table.on('checkbox(demo)', function(obj){
 			    console.log(obj)
@@ -90,6 +93,7 @@
 			    active[type] ? active[type].call(this) : '';
 			  });
 			});
+		
 	</script>
 </body>
 </html>

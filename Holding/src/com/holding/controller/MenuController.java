@@ -71,7 +71,6 @@ public class MenuController {
 		String menuName = (String) request.getParameter("menuname");
 		Menu menu = menuService.getMenuByName(menuName);
 		return menu.getUrl();
-
 	}
 
 	// 跳转到菜单列表
