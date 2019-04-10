@@ -3,7 +3,7 @@ package com.holding.vm;
 import com.holding.po.Desk;
 import com.holding.po.Seat;
 
-public class DeskVm extends Desk{
+public class DeskChildVm extends Desk{
 
 	private Seat seat;
 

@@ -20,7 +20,7 @@ public class SeatServiceImpl implements SeatService {
 	private SeatMapper seatMapper;
 	
 	@Override
-	public List<Seat> getSeatListBydeskId(int deskId) {
+	public List<Seat> getSeatlistBydeskId(int deskId) {
 		SeatExample seatExample = new SeatExample();
 		SeatExample.Criteria sCriteria = seatExample.createCriteria();
 		sCriteria.andDeskidEqualTo(deskId);

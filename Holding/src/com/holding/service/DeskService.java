@@ -7,17 +7,17 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.holding.po.Desk;
-import com.holding.vm.DeskIncludeChildListVm;
-import com.holding.vm.DeskVm;
+import com.holding.vm.DeskChildListVm;
+import com.holding.vm.DeskChildVm;
 
 @Service
 public interface DeskService {
 
-	public List<DeskIncludeChildListVm> getDeskCListVmListByroomId(int roomId);
+	public List<DeskChildListVm> getDeskChildlistVmListByroomId(int roomId);
 	
-	public DeskVm getDeskVmById(int deskId,int seatId);
+	public DeskChildVm getDeskChildVmById(int deskId,int seatId);
 	
-	public List<Desk> getDeskListByRoomId(int roomId);
+	public List<Desk> getDesklistByRoomId(int roomId);
 	
 	public Map<String, Object> insertDesk(Desk desk) throws SQLException;
 	

@@ -70,7 +70,7 @@
 		
 		</div>
 		<div class="layui-body">
-			<iframe id="data-table"  src="" width="100%" height="100%"></iframe>
+			<iframe id="data-table" src="" width="100%" height="100%"></iframe>
 
 			<!-- <table class="layui-table"
 				lay-data="{width: 1150, height:500, url:'/Holding/user/getUserList.do', page:true, id:'idTest'}"
@@ -126,21 +126,17 @@
 		
 		function getid(id) {
 			console.log(id);
-			 function getMenuUrl(url) {
-				 console.log(url);
-				$("#data-table").attr("src", url);
-			} 
+			function getMenuUrl() {
+				$("#data-table").attr("src", '/Holding/menu/getMenuUrlByMenuname.do');
+			}
 			$.ajax({
 				"url": "/Holding/menu/getMenuUrlByMenuname.do",
 				"data": "menuname="+id,
 				"type": "POST",
-				"async": true,
 				"dataType": "text",
-				"success": function (url) {
-							getMenuUrl(url);			
-						}
+				"success": getMenuUrl
 			});
-			/*  $("#data-table").attr("src", '/MenuTable.jsp');  */
+			 $("#data-table").attr("src", '/Holding/menu/getMenuUrlByMenuname.do'); 
 		}
 		
 		layui.use('element', function() {

@@ -16,8 +16,8 @@ import com.holding.po.DeskExample;
 import com.holding.po.Seat;
 import com.holding.service.DeskService;
 import com.holding.service.SeatService;
-import com.holding.vm.DeskIncludeChildListVm;
-import com.holding.vm.DeskVm;
+import com.holding.vm.DeskChildListVm;
+import com.holding.vm.DeskChildVm;
 
 @Service
 @Transactional
@@ -28,15 +28,16 @@ public class DeskServiceImpl implements DeskService {
 	@Autowired
 	private SeatService seatService;
 	
+	//获取包含座位列表的桌子列表---通过自习室ID
 	@Override
-	public List<DeskIncludeChildListVm> getDeskCListVmListByroomId(int roomId) {
+	public List<DeskChildListVm> getDeskChildlistVmListByroomId(int roomId) {
 		DeskExample deskExample = new DeskExample();
 		DeskExample.Criteria dCriteria = deskExample.createCriteria();
 		dCriteria.andRoomidEqualTo(roomId);
 		List<Desk> desks = deskMapper.selectByExample(deskExample);
-		List<DeskIncludeChildListVm> deskVms = new ArrayList<>();
+		List<DeskChildListVm> deskVms = new ArrayList<>();
 		for (Desk desk : desks) {
-			DeskIncludeChildListVm deskVm = new DeskIncludeChildListVm();
+			DeskChildListVm deskVm = new DeskChildListVm();
 			deskVm.setId(desk.getId());
 			deskVm.setName(desk.getName());
 			deskVm.setHeight(desk.getHeight());
@@ -47,17 +48,17 @@ public class DeskServiceImpl implements DeskService {
 			deskVm.setYaxis(desk.getYaxis());
 			deskVm.setRoomid(desk.getRoomid());
 			deskVm.setStatus(desk.getStatus());
-			List<Seat> seats = seatService.getSeatListBydeskId(desk.getId());
+			List<Seat> seats = seatService.getSeatlistBydeskId(desk.getId());
 			deskVm.setSeat(seats);
 			deskVms.add(deskVm);
 		}
 		return deskVms;
 	}
 
-	//用于定位位置
+	//用于定位座位
 	@Override
-	public DeskVm getDeskVmById(int deskId,int seatId) {
-		DeskVm deskVm = new DeskVm();
+	public DeskChildVm getDeskChildVmById(int deskId,int seatId) {
+		DeskChildVm deskVm = new DeskChildVm();
 		Desk desk = deskMapper.selectByPrimaryKey(deskId);
 		Seat seat = seatService.getSeatById(seatId);
 		deskVm.setSeat(seat);
@@ -75,13 +76,12 @@ public class DeskServiceImpl implements DeskService {
 	}
 
 	@Override
-	public List<Desk> getDeskListByRoomId(int roomId) {
+	public List<Desk> getDesklistByRoomId(int roomId) {
 		DeskExample deskExample = new DeskExample();
 		DeskExample.Criteria dCriteria = deskExample.createCriteria();
 		dCriteria.andRoomidEqualTo(roomId);
 		return deskMapper.selectByExample(deskExample);
 	}
-	
 	
 	@Override
 	public Map<String, Object> insertDesk(Desk desk) throws SQLException {
@@ -102,7 +102,7 @@ public class DeskServiceImpl implements DeskService {
 		Map<String, Object> msg = new HashMap<>();
 		for (int deskId : deskIds) {
 			try {
-				List<Seat> seats = seatService.getSeatListBydeskId(deskId);
+				List<Seat> seats = seatService.getSeatlistBydeskId(deskId);
 				List<Integer> seatIds = new ArrayList<>();
 				for (Seat seat : seats) {
 					seatIds.add(seat.getId());

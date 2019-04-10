@@ -12,10 +12,9 @@
 <script type="text/javascript" src="${basePath }/js/jquery-3.3.1.js"></script>
 </head>
 <body>
-	<table class="layui-table" 
-				lay-data="{width: 1100, height:500, url:'/Holding/menu/getMenuList.do', page:true, id:'idTest'}"
+	<table class="layui-table"
+				lay-data="{width: 1100, height:500, url:'/Holding/api/menu/getMenuList.do', page:true, id:'idTest'}"
 				lay-filter="demo">
-				
 				<thead>
 					<tr>
 						<th lay-data="{type:'checkbox'}">ID</th>
@@ -33,23 +32,20 @@
 
 
 	<script type="text/html" id="barDemo">
+  		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script>
 
 	<script>
 		//JavaScript代码区域
-		function getid(id) {
-			console.log(id);
-		};
+		
 		layui.use('element', function() {
 			var element = layui.element;
 
 		});
-		
 		layui.use('table', function(){
 			  var table = layui.table;
-			  
 			  //监听表格复选框选择
 			  table.on('checkbox(demo)', function(obj){
 			    console.log(obj)
@@ -62,12 +58,10 @@
 			    } else if(obj.event === 'del'){
 			      layer.confirm('真的删除行么', function(index){
 			        obj.del();
-			        $.get("/Holding/menu/deleteMenuByName.do?menuname="+data.menuname);
 			        layer.close(index);
 			      });
 			    } else if(obj.event === 'edit'){
-			      $.get("/Holding/menu/updateMenuByName.do?menuname="+data.menuname);
-			      layer.alert("/Holding/menu/updateMenuByName.do?menuname="+data.menuname);
+			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
 			    }
 			  });
 			  
@@ -93,7 +87,6 @@
 			    active[type] ? active[type].call(this) : '';
 			  });
 			});
-		
 	</script>
 </body>
 </html>

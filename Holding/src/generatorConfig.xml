@@ -37,7 +37,6 @@
 		<table tableName="desk"></table>
 		<table tableName="floor"></table>
 		<table tableName="library"></table>
-		
 		<table tableName="region"></table>
 		<table tableName="reservation"></table>
 		<table tableName="room"></table>
@@ -45,6 +44,7 @@
 		<table tableName="user"></table>
 		<table tableName="menu"></table>
  -->
-<table tableName="placeholderRate"></table>
+
+		<table tableName="placeholderRate"></table>
 	</context>
 </generatorConfiguration>

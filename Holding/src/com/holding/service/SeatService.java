@@ -11,7 +11,7 @@ import com.holding.po.Seat;
 @Service
 public interface SeatService {
 
-	public List<Seat> getSeatListBydeskId(int deskId);
+	public List<Seat> getSeatlistBydeskId(int deskId);
 	
 	public Seat getSeatById(int seatId);
 	

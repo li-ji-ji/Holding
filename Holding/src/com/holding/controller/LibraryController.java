@@ -6,15 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.holding.po.Library;
 import com.holding.service.LibraryService;
-import com.holding.vm.LibraryIncludePercentageVm;
+import com.holding.vm.LibraryPercentageVm;
 import com.holding.vm.LibraryVm;
-@CrossOrigin
+
 @RestController
 @RequestMapping("/library")
 public class LibraryController {
@@ -22,10 +21,10 @@ public class LibraryController {
 	@Autowired
 	private LibraryService libraryService;
 	
-	//通过区域获取图书馆列表(包含占座率)
-	@RequestMapping("/getLibraryList.do")
-	public List<LibraryIncludePercentageVm> LibraryIncludePercentageVm(int provinceId, int cityId) {
-		return libraryService.getLibraryIncludePercentageVmList(provinceId, cityId);
+	//通过区域获取图书馆列表
+	@RequestMapping("/getLibraryPercentageVmList.do")
+	public List<LibraryPercentageVm> getLibraryPercentageVmList(int provinceId, int cityId) {
+		return libraryService.getLibraryPercentageVmList(provinceId, cityId);
 	}
 	
 	//根据定位到位置信息

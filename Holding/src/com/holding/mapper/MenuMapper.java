@@ -3,11 +3,8 @@ package com.holding.mapper;
 import com.holding.po.Menu;
 import com.holding.po.MenuExample;
 import java.util.List;
-
-import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
 
 public interface MenuMapper {
     long countByExample(MenuExample example);
@@ -35,10 +32,4 @@ public interface MenuMapper {
     //根据菜单名搜索菜单
     @Select("select * from menu where menuname=#{menuname}")
     Menu getMenuByname(String menuname) throws Exception;
-    
-    //根据菜单菜单名删除菜单
-    @Delete("delete from menu where menuname=#{menuname}")
-    int deleteMenuByName(String menuname) throws  Exception;
-    
-    
 }

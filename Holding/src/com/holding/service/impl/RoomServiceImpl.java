@@ -15,15 +15,58 @@ import com.holding.po.Room;
 import com.holding.po.RoomExample;
 import com.holding.service.DeskService;
 import com.holding.service.RoomService;
-import com.holding.vm.DeskVm;
-import com.holding.vm.RoomIncludePercentageVm;
-import com.holding.vm.RoomVm;
+import com.holding.vm.DeskChildVm;
+import com.holding.vm.RoomChildVm;
+import com.holding.vm.RoomPercentageVm;
 
 @Service
 public class RoomServiceImpl implements RoomService {
 
 	@Autowired
 	private RoomMapper roomMapper;
+	
+	@Override
+	public List<Room> getRoomlistByFloorId(int floorId) {
+		RoomExample roomExample = new RoomExample();
+		RoomExample.Criteria rCriteria = roomExample.createCriteria();
+		rCriteria.andFlooridEqualTo(floorId);
+		return roomMapper.selectByExample(roomExample);
+	}
+
+	@Override
+	public List<RoomPercentageVm> getRoomPercentageVm(int floorId) {
+		List<RoomPercentageVm> roomPercentageVms = new ArrayList<>();
+		List<Room> rooms = this.getRoomlistByFloorId(floorId);
+		for (Room room : rooms) {
+			RoomPercentageVm roomPercentageVm = new RoomPercentageVm();
+			roomPercentageVm.setId(room.getId());
+			roomPercentageVm.setFloorid(room.getFloorid());
+			roomPercentageVm.setName(room.getName());
+			roomPercentageVm.setImageurl(room.getImageurl());
+			roomPercentageVm.setStatus(room.getStatus());
+			roomPercentageVm.setUsageQuantity(0.5);
+			roomPercentageVms.add(roomPercentageVm);
+		}
+		return roomPercentageVms;
+	}
+	
+	@Autowired
+	private DeskService deskService;
+	
+	//定位座位
+	@Override
+	public RoomChildVm getRoomChildVmById(int roomId, int deskId, int seatId) {
+		RoomChildVm roomVm = new RoomChildVm();
+		DeskChildVm deskVm = deskService.getDeskChildVmById(deskId, seatId);
+		roomVm.setDeskVm(deskVm);
+		Room room = roomMapper.selectByPrimaryKey(roomId);
+		roomVm.setId(room.getId());
+		roomVm.setFloorid(room.getFloorid());
+		roomVm.setName(room.getName());
+		roomVm.setImageurl(room.getImageurl());
+		roomVm.setStatus(room.getStatus());
+		return roomVm;
+	}
 	
 	@Override
 	public Map<String, Object> insertRoom(Room room) throws SQLException {
@@ -44,7 +87,7 @@ public class RoomServiceImpl implements RoomService {
 		Map<String, Object> msg = new HashMap<>();
 		for (int roomId : roomIds) {
 			try {
-				List<Desk> desks = deskService.getDeskListByRoomId(roomId);
+				List<Desk> desks = deskService.getDesklistByRoomId(roomId);
 				List<Integer> deskIds = new ArrayList<>();
 				for (Desk desk : desks) {
 					deskIds.add(desk.getId());
@@ -74,49 +117,7 @@ public class RoomServiceImpl implements RoomService {
 		}
 		return msg;
 	}
-	
-	@Override
-	public List<Room> getRoomListByFloorId(int floorId) {
-		RoomExample roomExample = new RoomExample();
-		RoomExample.Criteria rCriteria = roomExample.createCriteria();
-		rCriteria.andFlooridEqualTo(floorId);
-		return roomMapper.selectByExample(roomExample);
-	}
 
-	@Autowired
-	private DeskService deskService;
 	
-	@Override
-	public RoomVm getRoomVmById(int roomId, int deskId, int seatId) {
-		RoomVm roomVm = new RoomVm();
-		DeskVm deskVm = deskService.getDeskVmById(deskId, seatId);
-		roomVm.setDeskVm(deskVm);
-		Room room = roomMapper.selectByPrimaryKey(roomId);
-		roomVm.setId(room.getId());
-		roomVm.setFloorid(room.getFloorid());
-		roomVm.setImageurl(room.getImageurl());
-		roomVm.setName(room.getName());
-		roomVm.setStatus(room.getStatus());
-		return roomVm;
-	}
-	
-
-	@Override
-	public List<RoomIncludePercentageVm> getRoomIncludePercentageVmsByFloorId(int floorId) {
-		List<Room> rooms = this.getRoomListByFloorId(floorId);
-		List<RoomIncludePercentageVm> roomIncludePercentageVms = new ArrayList<>();
-		for (Room room : rooms) {
-			RoomIncludePercentageVm roomIncludePercentageVm = new RoomIncludePercentageVm();
-			roomIncludePercentageVm.setId(room.getId());
-			roomIncludePercentageVm.setFloorid(room.getFloorid());
-			roomIncludePercentageVm.setName(room.getName());
-			roomIncludePercentageVm.setImageurl(room.getImageurl());
-			roomIncludePercentageVm.setStatus(room.getStatus());
-			//获取自习室占座率---通过roomId查询最新一条占座率记录
-			roomIncludePercentageVm.setUsageQuantity(0.5);
-			roomIncludePercentageVms.add(roomIncludePercentageVm);
-		}
-		return roomIncludePercentageVms;
-	}
 
 }
