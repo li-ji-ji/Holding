@@ -27,4 +27,6 @@ public interface PlaceholderrateMapper {
     int updateByPrimaryKeySelective(Placeholderrate record);
 
     int updateByPrimaryKey(Placeholderrate record);
+    
+    
 }
