@@ -285,6 +285,66 @@ public class ReservationExample {
             return (Criteria) this;
         }
 
+        public Criteria andBooktimeIsNull() {
+            addCriterion("bookTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeIsNotNull() {
+            addCriterion("bookTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeEqualTo(Date value) {
+            addCriterion("bookTime =", value, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeNotEqualTo(Date value) {
+            addCriterion("bookTime <>", value, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeGreaterThan(Date value) {
+            addCriterion("bookTime >", value, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("bookTime >=", value, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeLessThan(Date value) {
+            addCriterion("bookTime <", value, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeLessThanOrEqualTo(Date value) {
+            addCriterion("bookTime <=", value, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeIn(List<Date> values) {
+            addCriterion("bookTime in", values, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeNotIn(List<Date> values) {
+            addCriterion("bookTime not in", values, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeBetween(Date value1, Date value2) {
+            addCriterion("bookTime between", value1, value2, "booktime");
+            return (Criteria) this;
+        }
+
+        public Criteria andBooktimeNotBetween(Date value1, Date value2) {
+            addCriterion("bookTime not between", value1, value2, "booktime");
+            return (Criteria) this;
+        }
+
         public Criteria andStarttimeIsNull() {
             addCriterion("startTime is null");
             return (Criteria) this;
@@ -342,6 +402,66 @@ public class ReservationExample {
 
         public Criteria andStarttimeNotBetween(Date value1, Date value2) {
             addCriterion("startTime not between", value1, value2, "starttime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeIsNull() {
+            addCriterion("endTime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeIsNotNull() {
+            addCriterion("endTime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeEqualTo(Date value) {
+            addCriterion("endTime =", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeNotEqualTo(Date value) {
+            addCriterion("endTime <>", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeGreaterThan(Date value) {
+            addCriterion("endTime >", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("endTime >=", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeLessThan(Date value) {
+            addCriterion("endTime <", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeLessThanOrEqualTo(Date value) {
+            addCriterion("endTime <=", value, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeIn(List<Date> values) {
+            addCriterion("endTime in", values, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeNotIn(List<Date> values) {
+            addCriterion("endTime not in", values, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeBetween(Date value1, Date value2) {
+            addCriterion("endTime between", value1, value2, "endtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEndtimeNotBetween(Date value1, Date value2) {
+            addCriterion("endTime not between", value1, value2, "endtime");
             return (Criteria) this;
         }
 

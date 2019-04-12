@@ -903,6 +903,126 @@ public class UserExample {
             addCriterion("status not between", value1, value2, "status");
             return (Criteria) this;
         }
+
+        public Criteria andBookedIsNull() {
+            addCriterion("booked is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedIsNotNull() {
+            addCriterion("booked is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedEqualTo(Integer value) {
+            addCriterion("booked =", value, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedNotEqualTo(Integer value) {
+            addCriterion("booked <>", value, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedGreaterThan(Integer value) {
+            addCriterion("booked >", value, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedGreaterThanOrEqualTo(Integer value) {
+            addCriterion("booked >=", value, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedLessThan(Integer value) {
+            addCriterion("booked <", value, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedLessThanOrEqualTo(Integer value) {
+            addCriterion("booked <=", value, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedIn(List<Integer> values) {
+            addCriterion("booked in", values, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedNotIn(List<Integer> values) {
+            addCriterion("booked not in", values, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedBetween(Integer value1, Integer value2) {
+            addCriterion("booked between", value1, value2, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andBookedNotBetween(Integer value1, Integer value2) {
+            addCriterion("booked not between", value1, value2, "booked");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreIsNull() {
+            addCriterion("score is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreIsNotNull() {
+            addCriterion("score is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreEqualTo(Integer value) {
+            addCriterion("score =", value, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreNotEqualTo(Integer value) {
+            addCriterion("score <>", value, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreGreaterThan(Integer value) {
+            addCriterion("score >", value, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreGreaterThanOrEqualTo(Integer value) {
+            addCriterion("score >=", value, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreLessThan(Integer value) {
+            addCriterion("score <", value, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreLessThanOrEqualTo(Integer value) {
+            addCriterion("score <=", value, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreIn(List<Integer> values) {
+            addCriterion("score in", values, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreNotIn(List<Integer> values) {
+            addCriterion("score not in", values, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreBetween(Integer value1, Integer value2) {
+            addCriterion("score between", value1, value2, "score");
+            return (Criteria) this;
+        }
+
+        public Criteria andScoreNotBetween(Integer value1, Integer value2) {
+            addCriterion("score not between", value1, value2, "score");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

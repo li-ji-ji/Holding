@@ -25,6 +25,10 @@ public class User {
 
     private Integer status;
 
+    private Integer booked;
+
+    private Integer score;
+
     public Integer getId() {
         return id;
     }
@@ -119,5 +123,21 @@ public class User {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Integer getBooked() {
+        return booked;
+    }
+
+    public void setBooked(Integer booked) {
+        this.booked = booked;
+    }
+
+    public Integer getScore() {
+        return score;
+    }
+
+    public void setScore(Integer score) {
+        this.score = score;
     }
 }

@@ -5,7 +5,9 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="seatId" jdbcType="INTEGER" property="seatid" />
     <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="bookTime" jdbcType="TIMESTAMP" property="booktime" />
     <result column="startTime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endTime" jdbcType="TIMESTAMP" property="endtime" />
     <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -67,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, seatId, userId, startTime, status
+    id, seatId, userId, bookTime, startTime, endTime, status
   </sql>
   <select id="selectByExample" parameterType="com.holding.po.ReservationExample" resultMap="BaseResultMap">
     select
@@ -101,9 +103,11 @@
   </delete>
   <insert id="insert" parameterType="com.holding.po.Reservation">
     insert into reservation (id, seatId, userId, 
-      startTime, status)
+      bookTime, startTime, endTime, 
+      status)
     values (#{id,jdbcType=INTEGER}, #{seatid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
-      #{starttime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER})
+      #{booktime,jdbcType=TIMESTAMP}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.holding.po.Reservation">
     insert into reservation
@@ -117,8 +121,14 @@
       <if test="userid != null">
         userId,
       </if>
+      <if test="booktime != null">
+        bookTime,
+      </if>
       <if test="starttime != null">
         startTime,
+      </if>
+      <if test="endtime != null">
+        endTime,
       </if>
       <if test="status != null">
         status,
@@ -134,8 +144,14 @@
       <if test="userid != null">
         #{userid,jdbcType=INTEGER},
       </if>
+      <if test="booktime != null">
+        #{booktime,jdbcType=TIMESTAMP},
+      </if>
       <if test="starttime != null">
         #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
@@ -160,8 +176,14 @@
       <if test="record.userid != null">
         userId = #{record.userid,jdbcType=INTEGER},
       </if>
+      <if test="record.booktime != null">
+        bookTime = #{record.booktime,jdbcType=TIMESTAMP},
+      </if>
       <if test="record.starttime != null">
         startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        endTime = #{record.endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
@@ -176,7 +198,9 @@
     set id = #{record.id,jdbcType=INTEGER},
       seatId = #{record.seatid,jdbcType=INTEGER},
       userId = #{record.userid,jdbcType=INTEGER},
+      bookTime = #{record.booktime,jdbcType=TIMESTAMP},
       startTime = #{record.starttime,jdbcType=TIMESTAMP},
+      endTime = #{record.endtime,jdbcType=TIMESTAMP},
       status = #{record.status,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -191,8 +215,14 @@
       <if test="userid != null">
         userId = #{userid,jdbcType=INTEGER},
       </if>
+      <if test="booktime != null">
+        bookTime = #{booktime,jdbcType=TIMESTAMP},
+      </if>
       <if test="starttime != null">
         startTime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endTime = #{endtime,jdbcType=TIMESTAMP},
       </if>
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
@@ -204,7 +234,9 @@
     update reservation
     set seatId = #{seatid,jdbcType=INTEGER},
       userId = #{userid,jdbcType=INTEGER},
+      bookTime = #{booktime,jdbcType=TIMESTAMP},
       startTime = #{starttime,jdbcType=TIMESTAMP},
+      endTime = #{endtime,jdbcType=TIMESTAMP},
       status = #{status,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>

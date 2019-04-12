@@ -32,7 +32,6 @@
 			targetPackage="com.holding.mapper" targetProject=".\src">
 			<property name="enableSubPackages" value="true" />
 		</javaClientGenerator>
-<!-- 
 		<table tableName="admin"></table>
 		<table tableName="desk"></table>
 		<table tableName="floor"></table>
@@ -43,8 +42,6 @@
 		<table tableName="seat"></table>
 		<table tableName="user"></table>
 		<table tableName="menu"></table>
- -->
-
 		<table tableName="placeholderRate"></table>
 	</context>
 </generatorConfiguration>

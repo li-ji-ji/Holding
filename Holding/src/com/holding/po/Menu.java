@@ -6,9 +6,9 @@ public class Menu {
     private String menuname;
 
     private Integer menumid;
-    
+
     private String images;
-    
+
     private String url;
 
     public Integer getMenuid() {
@@ -35,29 +35,19 @@ public class Menu {
         this.menumid = menumid;
     }
 
-	public String getImages() {
-		return images;
-	}
+    public String getImages() {
+        return images;
+    }
 
-	public void setImages(String images) {
-		this.images = images;
-	}
+    public void setImages(String images) {
+        this.images = images == null ? null : images.trim();
+    }
 
-	public String getUrl() {
-		return url;
-	}
+    public String getUrl() {
+        return url;
+    }
 
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	@Override
-	public String toString() {
-		return "Menu [menuid=" + menuid + ", menuname=" + menuname + ", menumid=" + menumid + ", images=" + images
-				+ ", url=" + url + "]";
-	}
-
-	
-    
-    
+    public void setUrl(String url) {
+        this.url = url == null ? null : url.trim();
+    }
 }

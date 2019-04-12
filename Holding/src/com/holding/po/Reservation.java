@@ -9,7 +9,11 @@ public class Reservation {
 
     private Integer userid;
 
+    private Date booktime;
+
     private Date starttime;
+
+    private Date endtime;
 
     private Integer status;
 
@@ -37,12 +41,28 @@ public class Reservation {
         this.userid = userid;
     }
 
+    public Date getBooktime() {
+        return booktime;
+    }
+
+    public void setBooktime(Date booktime) {
+        this.booktime = booktime;
+    }
+
     public Date getStarttime() {
         return starttime;
     }
 
     public void setStarttime(Date starttime) {
         this.starttime = starttime;
+    }
+
+    public Date getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(Date endtime) {
+        this.endtime = endtime;
     }
 
     public Integer getStatus() {

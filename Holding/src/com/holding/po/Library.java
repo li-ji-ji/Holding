@@ -2,10 +2,6 @@ package com.holding.po;
 
 import java.util.Date;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class Library {
     private Integer id;
 
@@ -21,12 +17,8 @@ public class Library {
 
     private String address;
 
-    @JsonFormat(pattern="HH:mm:ss",timezone = "GMT+8")
-    @DateTimeFormat(pattern="HH:mm:ss")
     private Date starttime;
 
-    @JsonFormat(pattern="HH:mm:ss",timezone = "GMT+8")
-    @DateTimeFormat(pattern="HH:mm:ss")
     private Date endtime;
 
     private Integer status;
