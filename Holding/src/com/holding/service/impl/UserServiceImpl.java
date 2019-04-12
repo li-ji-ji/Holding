@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import com.holding.mapper.UserMapper;
 import com.holding.po.User;
+import com.holding.po.UserExample;
+import com.holding.po.UserExample.Criteria;
 import com.holding.service.UserService;
 
 @Service
@@ -24,7 +26,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User getUserByName(String name) throws Exception {
 		// TODO Auto-generated method stub
-		return userMapper.selectUserByName(name);
+		UserExample userExample=new UserExample();
+		Criteria criteria=userExample.createCriteria();
+		criteria.andNameEqualTo(name);
+		
+		return userMapper.selectByExample(userExample).get(0);
 	}
 
 }

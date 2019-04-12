@@ -14,6 +14,7 @@ import com.holding.po.ResultMsg;
 import com.holding.po.User;
 import com.holding.service.UserService;
 import com.holding.utils.LayUIJSON;
+import com.holding.vm.MsgVm;
 
 @CrossOrigin
 @RestController
@@ -45,8 +46,26 @@ public class UserAPI {
 	
 	//根据用户名获取用户
 	@RequestMapping("/getuserbyname.do")
-	public User getUserByName(HttpServletRequest request,HttpServletResponse response) throws Exception{
+	public MsgVm getUserByName(HttpServletRequest request,HttpServletResponse response) throws Exception{
 		String name=request.getParameter("name");
-		return userService.getUserByName(name);
+		String password=request.getParameter("password");
+		MsgVm msg=new MsgVm();
+		User user=userService.getUserByName(name);
+		//判断是否存在该用户
+		if(user == null) {
+			msg.setCode(0);
+			msg.setMsg("不存在该用户！");
+			return msg;
+		}
+		//密码校验
+		if(!password.equals(user.getPassword())) {
+			msg.setCode(0);
+			msg.setMsg("密码错误！");
+			return msg;
+		}
+		msg.setCode(1);
+		msg.setMsg("登入成功！");
+		msg.setUser(user);
+		return msg;
 	}
 }

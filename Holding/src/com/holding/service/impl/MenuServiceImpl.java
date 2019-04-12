@@ -7,11 +7,11 @@ import java.util.List;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.holding.mapper.MenuMapper;
 import com.holding.po.Menu;
 import com.holding.po.MenuExample;
+import com.holding.po.MenuExample.Criteria;
 import com.holding.service.MenuService;
 import com.holding.vm.MenuVM;
 
@@ -30,7 +30,6 @@ public class MenuServiceImpl implements MenuService {
 		criteria.andMenumidEqualTo(menuMid);
 		List<Menu> menus=menuMapper.selectByExample(example);
 		System.out.println(menus);
-		System.out.println("-----------看这里-----------");
 		
 		return menus;
 	}
@@ -46,14 +45,9 @@ public class MenuServiceImpl implements MenuService {
 		for(Menu menu:menus) {
 			menuVM=new MenuVM();
 			System.out.println(menuVM);
-			System.out.println("每个一级菜单："+menu);
 			BeanUtils.copyProperties(menu, menuVM);
-			System.out.println("每个一级菜单入VM："+menuVM);
 			List<Menu> sub=getMenuByMid(menu.getMenuid());
-			System.out.println("一级菜单ID"+menu.getMenuid());
 			System.out.println(sub);
-
-			System.out.println("-----------好嗨哟-----------");
 			menuVM.setMenus(sub);
 			vms.add(menuVM);
 		}
@@ -98,8 +92,28 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public Menu getMenuByName(String menuname) throws Exception {
+		MenuExample menuExample=new MenuExample();
+		Criteria criteria=menuExample.createCriteria();
+		criteria.andMenunameEqualTo(menuname);
+		return menuMapper.selectByExample(menuExample).get(0);
+	}
+
+
+
+	//根据菜单名删除菜单
+	@Override
+	public int deleteMenuByName(String menuName) throws SQLException {
 		// TODO Auto-generated method stub
-		return menuMapper.getMenuByname(menuname);
+		MenuExample menuExample =new MenuExample();
+		Criteria criteria = menuExample.createCriteria();
+		criteria.andMenunameEqualTo(menuName);
+		try {
+			menuMapper.deleteByExample(menuExample);
+		} catch (Exception e) {
+			System.out.println("删除失败");
+			return 0;
+		}
+		return 1;
 	}
 
 

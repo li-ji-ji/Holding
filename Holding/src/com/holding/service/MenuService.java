@@ -39,6 +39,9 @@ public interface MenuService {
 	//删除菜单
 	void deleteMenu(Integer menuid) throws SQLException;
 	
+	//根据菜单名删除菜单
+	int deleteMenuByName(String menuName) throws SQLException;
+	
 	//更新菜单
 	void updateMenu(Integer menuid,Menu menu) throws SQLException;
 }

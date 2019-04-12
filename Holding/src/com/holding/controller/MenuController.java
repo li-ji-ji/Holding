@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.holding.po.Menu;
 import com.holding.service.MenuService;
+import com.holding.utils.LayUIJSON;
 import com.holding.vm.MenuVM;
 
 @Controller
@@ -46,15 +47,56 @@ public class MenuController {
 	 * session.setAttribute("secondMenu", secondMenu); return
 	 * "menu/BackgroundMainPage"; }
 	 */
-	 
-	 @RequestMapping("/getMenuUrlByMenuname.do")
-	 @ResponseBody
-	 public String  getMenuUrlByMenuname(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		String menuName=(String) request.getParameter("menuname");
-		System.out.println("获取到的菜单名："+menuName);
-		Menu menu=menuService.getMenuByName(menuName);
-		System.out.println("获取到的菜单："+menu);
+
+
+	// 获取菜单列表数据
+	@RequestMapping("/getMenuList.do")
+	@ResponseBody
+	public LayUIJSON getMenuList() throws Exception {
+		LayUIJSON layUIJSON = new LayUIJSON();
+		layUIJSON.setData(menuService.getAll());
+		System.out.println(layUIJSON);
+		return layUIJSON;
+	}
+
+	// 根据获得的菜单名获取菜单url
+	@RequestMapping("/getMenuUrlByMenuname.do")
+	@ResponseBody
+	public String getMenuUrlByMenuname(HttpSession session, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		String menuName = (String) request.getParameter("menuname");
+		Menu menu = menuService.getMenuByName(menuName);
 		return menu.getUrl();
+	}
+
+	// 跳转到菜单列表
+	@RequestMapping("/getMenuTable.do")
+	public String getMenuTable() throws Exception {
+		return "menu/MenuTable";
+	}
+
+	// 跳转到菜单表单
+	@RequestMapping("/getMenuFrom.do")
+	public String getMenuFrom() throws Exception {
+		return "menu/MenuFrom";
+	}
+
+	
+	
+
+	//根据菜单名删除菜单
+	@RequestMapping("/deleteMenuByName.do")
+	public String deleteMenuByName(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String menuName=request.getParameter("menuname");
+		menuService.deleteMenuByName(menuName);
+		return "menu/MenuTable";
+	}
+	
+	//修改菜单数据
+	@RequestMapping("/updateMenuByName.do")
+	public String updateMenuByName(Model model,HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception{
+
+		return null;
 		 
 	 }
 	 
