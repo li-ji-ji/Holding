@@ -17,16 +17,21 @@
   <div class="layui-form-item">
     <label class="layui-form-label">菜单ID</label>
     <div class="layui-input-block">
-      <input type="number" name="menuid" lay-verify="title" autocomplete="off" placeholder="请输入菜单ID" class="layui-input">
+      <input type="number" name="menuid" id="menuid" lay-verify="title" autocomplete="off" placeholder="请输入菜单ID" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item">
     <label class="layui-form-label">菜单名称</label>
     <div class="layui-input-block">
-      <input type="text" name="menuname" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
+      <input type="text" name="menuname" id="menuname" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
     </div>
   </div>
-  
+  <div class="layui-form-item">
+    <label class="layui-form-label">上级菜单ID</label>
+    <div class="layui-input-block">
+      <input type="number" name="menumid" id="menumid" lay-verify="title" autocomplete="off" placeholder="请输入上级菜单ID" class="layui-input">
+    </div>
+  </div>
   <!-- <div class="layui-form-item">
     <label class="layui-form-label">是否启用</label>
     <div class="layui-input-block">
@@ -39,12 +44,12 @@
   </div> -->
   
   
-  <div class="layui-form-item">
+  <!-- <div class="layui-form-item">
     <label class="layui-form-label">启用</label>
     <div class="layui-input-block">
-      <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+      <input type="checkbox" name="close" id="close" lay-skin="switch" lay-text="ON|OFF">
     </div>
-  </div>
+  </div> -->
   
   <!-- <div class="layui-form-item">
     <label class="layui-form-label">单选框</label>
@@ -56,13 +61,13 @@
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">图片链接</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入图片链接" class="layui-textarea" name="images"></textarea>
+      <textarea placeholder="请输入图片链接" class="layui-textarea" name="images" id="images"></textarea>
     </div>
   </div>
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">跳转链接</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入跳转链接" class="layui-textarea" name="url"></textarea>
+      <textarea placeholder="请输入跳转链接" class="layui-textarea" name="url" id="url"></textarea>
     </div>
   </div>
  
@@ -73,12 +78,12 @@
   </div>
 </form>
 <script>
+var status;
 layui.use(['form', 'layedit', 'laydate'], function(){
   var form = layui.form
   ,layer = layui.layer
   ,layedit = layui.layedit
   ,laydate = layui.laydate;
-  
   //日期
   laydate.render({
     elem: '#date'
@@ -116,22 +121,139 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   
   //监听提交
   form.on('submit(demo1)', function(data){
-    layer.alert(JSON.stringify(data.field), {
-      title: '最终的提交信息'
-    })
+	  console.log(data.field);
+	  var menuJSON=JSON.stringify(data.field);
+	  if(status==0){
+		  $.ajax({
+			  "url": "${basePath }/menu/updateMenuByMenu.do",
+			  "data":"menu="+menuJSON,
+			  "type":"post",
+	    	  "dataType" : "text",
+	    	  "async" :false,
+	    	  "success" : function (resultMsg) {
+	    		  if(resultMsg==1){
+	    			  layer.open({
+	    				    type: 1 //不显示标题栏   title : false/标题
+	    				    ,title: "修改成功，返回菜单"
+	    				    ,closeBtn: false
+	    				    ,area: '300px;'
+	    				    ,shade: 0.8
+	    				    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	    				    ,resize: false
+	    				    ,btn: ['好的']
+	    				    ,btnAlign: 'c'
+	    				    ,moveType: 1 //拖拽模式，0或者1
+	    				    ,success: function(layero){
+	    				         var btn = layero.find('.layui-layer-btn');
+	    				            btn.find('.layui-layer-btn0').attr({
+	    				                 href: '/Holding/menu/getMenuTable.do'
+	    				            ,target: '_parent'
+	    				        });
+	    				    }
+	    				});
+	    		  }else{
+	    			  layer.open({
+	  				    type: 1 //不显示标题栏   title : false/标题
+	  				    ,title: "修改失败，返回菜单"
+	  				    ,closeBtn: false
+	  				    ,area: '300px;'
+	  				    ,shade: 0.8
+	  				    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	  				    ,resize: false
+	  				    ,btn: ['好的']
+	  				    ,btnAlign: 'c'
+	  				    ,moveType: 1 //拖拽模式，0或者1
+	  				    ,success: function(layero){
+	  				         var btn = layero.find('.layui-layer-btn');
+	  				            btn.find('.layui-layer-btn0').attr({
+	  				                 href: '/Holding/menu/getMenuTable.do'
+	  				            ,target: '_parent'
+	  				        });
+	  				    }
+	  				});
+	    		  }
+				}
+		  });
+	  }else{
+		  $.ajax({
+			  "url": "${basePath }/menu/addmenu.do",
+			  "data":"menu="+menuJSON,
+			  "type":"post",
+	    	  "dataType" : "text",
+	    	  "async" :false,
+	    	  "success" : function (resultMsg) {
+	    		  if(resultMsg==1){
+	    			  layer.open({
+	    				    type: 1 //不显示标题栏   title : false/标题
+	    				    ,title: "添加成功，返回菜单"
+	    				    ,closeBtn: false
+	    				    ,area: '300px;'
+	    				    ,shade: 0.8
+	    				    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	    				    ,resize: false
+	    				    ,btn: ['好的']
+	    				    ,btnAlign: 'c'
+	    				    ,moveType: 1 //拖拽模式，0或者1
+	    				    ,success: function(layero){
+	    				         var btn = layero.find('.layui-layer-btn');
+	    				            btn.find('.layui-layer-btn0').attr({
+	    				                 href: '/Holding/menu/getMenuTable.do'
+	    				            ,target: '_self'
+	    				        });
+	    				    }
+	    				});
+	    		  }else{
+	    			  layer.open({
+	  				    type: 1 //不显示标题栏   title : false/标题
+	  				    ,title: "添加失败，返回菜单"
+	  				    ,closeBtn: false
+	  				    ,area: '300px;'
+	  				    ,shade: 0.8
+	  				    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	  				    ,resize: false
+	  				    ,btn: ['好的']
+	  				    ,btnAlign: 'c'
+	  				    ,moveType: 1 //拖拽模式，0或者1
+	  				    ,success: function(layero){
+	  				         var btn = layero.find('.layui-layer-btn');
+	  				            btn.find('.layui-layer-btn0').attr({
+	  				                 href: '/Holding/menu/getMenuTable.do'
+	  				            ,target: '_self'
+	  				        });
+	  				    }
+	  				});
+	    		  }
+				}
+		  });
+	  }
+	  
+	 
+	  
     return false;
   });
- 
+  
+  $(function getMenu() {
+		var menuMsg=eval('('+parent.json+')');
+		status=1;
+		if(menuMsg!=null){
+			status=0;
+			$("#menuid").val(menuMsg.menuid);
+			$("#menuname").val(menuMsg.menuname);
+			$("#menumid").val(menuMsg.menumid);
+			$("#images").val(menuMsg.images);
+			$("#url").val(menuMsg.url);
+		}
+		});
   //表单初始赋值
   /* form.val('example', {
-    "username": "贤心" // "name": "value"
-    ,"password": "123456"
+    "menuid": ""// "name": "value"
+    ,"menuname": menuname
     ,"interest": 1
     ,"like[write]": true //复选框选中状态
     ,"close": true //开关状态
     ,"sex": "女"
     ,"desc": "我爱 layui"
-  }) */
+  })  */
   
   
 });

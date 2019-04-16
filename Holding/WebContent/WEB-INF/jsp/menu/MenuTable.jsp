@@ -18,7 +18,7 @@
 				<thead>
 					<tr>
 						<th lay-data="{type:'checkbox'}">ID</th>
-						<th lay-data="{field:'menuid', width:80, sort: true}">菜单ID</th>
+						<th lay-data="{field:'menuid', width:100, sort: true}">菜单ID</th>
 						<th
 							lay-data="{field:'menuname', width:100, sort: true, edit: 'text'}">菜单</th>
 						<th lay-data="{field:'menumid', edit: 'text', Width: 80}">上级菜单ID</th>
@@ -32,7 +32,6 @@
 
 
 	<script type="text/html" id="barDemo">
-  		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script>
@@ -58,10 +57,41 @@
 			    } else if(obj.event === 'del'){
 			      layer.confirm('真的删除行么', function(index){
 			        obj.del();
+			        console.log(data.menuid);
+			        $.ajax({
+			        	"url" : "${basePath}/menu/deleteMenuById.do",
+			        	"data" : "menuid="+data.menuid,
+			        	"type" : "post",
+			        	"dataType" : "text",
+			        	"success" : function (returnMsg) {
+							if(returnMsg==1){
+								layer.alert("删除成功");
+							}else{
+								layer.alert("删除失败");
+							}
+						}
+			        })
 			        layer.close(index);
+			        
 			      });
 			    } else if(obj.event === 'edit'){
-			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+			      json=JSON.stringify(data);
+			      $.ajax({
+			    	  "url" : "/Holding/menu/getMenuToFrom.do",
+			    	  "data" : "menuid="+data.menuid,
+			    	  "type" : "get",
+			    	  "dataType" : "text",
+			    	  "success"	: function (menu) {
+			    		  layer.open({
+					    	  type: 2, 
+					    	  content: '/Holding/menu/getMenuFrom.do',
+					    	  area: ['80%', '80%'],
+					    	  shade: 0.5,
+					    	  
+					    	}); 
+					}
+			      });
+			      
 			    }
 			  });
 			  

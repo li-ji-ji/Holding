@@ -31,5 +31,8 @@ public class PlaceholderrateAPI {
 		return placeholderrateService.getAll();
 	}
 	
-	
+	@RequestMapping("/getLastestByLibraryid.do")
+	public Placeholderrate getLastestByLibraryid(Integer libraryId) throws Exception{
+		return placeholderrateService.getLastestByLibraryid(libraryId);
+	}
 }

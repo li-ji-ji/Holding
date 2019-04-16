@@ -2,7 +2,9 @@ package com.holding.service.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,9 +69,15 @@ public class MenuServiceImpl implements MenuService {
 
 
 	@Override
-	public void insertMenu(Menu menu) throws SQLException{
-		// TODO Auto-generated method stub
-		menuMapper.insertSelective(menu);
+	public int insertMenu(Menu menu) throws SQLException{
+		try {
+			menuMapper.insertSelective(menu);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("添加失败");
+			return 0;
+		}
+		return 1;
 	}
 
 
@@ -83,9 +91,18 @@ public class MenuServiceImpl implements MenuService {
 
 
 	@Override
-	public void updateMenu(Integer menuid, Menu menu) throws SQLException {
+	public Map<String, Object> updateMenu(Menu menu) throws SQLException {
 		// TODO Auto-generated method stub
-		
+		Map<String, Object> msg = new HashMap<>();
+		try {
+			menuMapper.updateByPrimaryKeySelective(menu);
+			msg.put("success", true);
+			msg.put("msg", "修改成功");
+		} catch (Exception e) {
+			msg.put("success", false);
+			msg.put("msg", "修改失败");
+		}
+		return msg;
 	}
 
 
@@ -114,6 +131,13 @@ public class MenuServiceImpl implements MenuService {
 			return 0;
 		}
 		return 1;
+	}
+
+
+
+	@Override
+	public Menu getMenuById(Integer menuId) throws Exception {
+		return menuMapper.selectByPrimaryKey(menuId);
 	}
 
 

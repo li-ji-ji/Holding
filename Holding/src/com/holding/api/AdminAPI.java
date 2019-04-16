@@ -11,7 +11,6 @@ import com.holding.po.Admin;
 import com.holding.po.ResultMsg;
 import com.holding.service.AdminService;
 
-@CrossOrigin
 @RestController
 @RequestMapping("/api/admin")
 public class AdminAPI {
