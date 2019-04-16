@@ -17,16 +17,21 @@
   <div class="layui-form-item">
     <label class="layui-form-label">菜单ID</label>
     <div class="layui-input-block">
-      <input type="number" name="menuid" lay-verify="title" autocomplete="off" placeholder="请输入菜单ID" class="layui-input">
+      <input type="number" name="menuid" id="menuid" lay-verify="title" autocomplete="off" placeholder="请输入菜单ID" class="layui-input">
     </div>
   </div>
   <div class="layui-form-item">
     <label class="layui-form-label">菜单名称</label>
     <div class="layui-input-block">
-      <input type="text" name="menuname" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
+      <input type="text" name="menuname" id="menuname" placeholder="请输入菜单名称" autocomplete="off" class="layui-input">
     </div>
   </div>
-  
+  <div class="layui-form-item">
+    <label class="layui-form-label">上级菜单ID</label>
+    <div class="layui-input-block">
+      <input type="number" name="menumid" id="menumid" lay-verify="title" autocomplete="off" placeholder="请输入上级菜单ID" class="layui-input">
+    </div>
+  </div>
   <!-- <div class="layui-form-item">
     <label class="layui-form-label">是否启用</label>
     <div class="layui-input-block">
@@ -39,12 +44,12 @@
   </div> -->
   
   
-  <div class="layui-form-item">
+  <!-- <div class="layui-form-item">
     <label class="layui-form-label">启用</label>
     <div class="layui-input-block">
-      <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+      <input type="checkbox" name="close" id="close" lay-skin="switch" lay-text="ON|OFF">
     </div>
-  </div>
+  </div> -->
   
   <!-- <div class="layui-form-item">
     <label class="layui-form-label">单选框</label>
@@ -56,13 +61,13 @@
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">图片链接</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入图片链接" class="layui-textarea" name="images"></textarea>
+      <textarea placeholder="请输入图片链接" class="layui-textarea" name="images" id="images"></textarea>
     </div>
   </div>
   <div class="layui-form-item layui-form-text">
     <label class="layui-form-label">跳转链接</label>
     <div class="layui-input-block">
-      <textarea placeholder="请输入跳转链接" class="layui-textarea" name="url"></textarea>
+      <textarea placeholder="请输入跳转链接" class="layui-textarea" name="url" id="url"></textarea>
     </div>
   </div>
  
@@ -78,7 +83,6 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   ,layer = layui.layer
   ,layedit = layui.layedit
   ,laydate = layui.laydate;
-  
   //日期
   laydate.render({
     elem: '#date'
@@ -116,22 +120,43 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   
   //监听提交
   form.on('submit(demo1)', function(data){
-    layer.alert(JSON.stringify(data.field), {
+	  console.log(data.field);
+	  var menuJSON=JSON.stringify(data.field);
+	  $.ajax({
+		  "url": "${basePath }/menu/updateMenuByMenu.do",
+		  "data":"menu="+menuJSON,
+		  "type":"post",
+    	  "dataType" : "text",
+    	  "async" :false,
+    	  "success" : function (resultMsg) {
+    		  console.log("成功");
+			}
+	  });
+    /* layer.alert(JSON.stringify(data.field), {
       title: '最终的提交信息'
     })
-    return false;
+    return false; */
   });
- 
+  $(function getMenu() {
+		var menuMsg=eval('('+parent.json+')');
+		if(menuMsg!=null){
+			$("#menuid").val(menuMsg.menuid);
+			$("#menuname").val(menuMsg.menuname);
+			$("#menumid").val(menuMsg.menumid);
+			$("#images").val(menuMsg.images);
+			$("#url").val(menuMsg.url);
+		}
+		});
   //表单初始赋值
   /* form.val('example', {
-    "username": "贤心" // "name": "value"
-    ,"password": "123456"
+    "menuid": ""// "name": "value"
+    ,"menuname": menuname
     ,"interest": 1
     ,"like[write]": true //复选框选中状态
     ,"close": true //开关状态
     ,"sex": "女"
     ,"desc": "我爱 layui"
-  }) */
+  })  */
   
   
 });

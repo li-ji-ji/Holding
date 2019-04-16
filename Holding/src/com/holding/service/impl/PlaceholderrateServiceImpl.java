@@ -51,7 +51,7 @@ public class PlaceholderrateServiceImpl implements PlaceholderrateService {
 		return 0;
 	}
 	
-	//根据图书馆名称查询最新记录
+	//根据图书馆ID查询最新记录
 	@Override
 	public Placeholderrate getLastestByLibraryid(Integer libraryId) throws Exception {
 		
@@ -64,6 +64,13 @@ public class PlaceholderrateServiceImpl implements PlaceholderrateService {
 		System.out.println(placeholderrate);
 		
 		return placeholderrateMapper.selectByPrimaryKey(placeholderrate.getId());
+	}
+	
+	//根据自习室ID查询最新一条占位记录
+	@Override
+	public Placeholderrate getLastestByRoomid(Integer roomId) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

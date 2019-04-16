@@ -32,7 +32,6 @@
 
 
 	<script type="text/html" id="barDemo">
-  		<a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
   		<a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
   		<a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
 	</script>
@@ -61,7 +60,23 @@
 			        layer.close(index);
 			      });
 			    } else if(obj.event === 'edit'){
-			      layer.alert('编辑行：<br>'+ JSON.stringify(data))
+			      json=JSON.stringify(data);
+			      $.ajax({
+			    	  "url" : "/Holding/menu/getMenuToFrom.do",
+			    	  "data" : "menuid="+data.menuid,
+			    	  "type" : "get",
+			    	  "dataType" : "text",
+			    	  "success"	: function (menu) {
+			    		  layer.open({
+					    	  type: 2, 
+					    	  content: '/Holding/menu/getMenuFrom.do',
+					    	  area: ['80%', '80%'],
+					    	  shade: 0.5,
+					    	  
+					    	}); 
+					}
+			      });
+			      
 			    }
 			  });
 			  

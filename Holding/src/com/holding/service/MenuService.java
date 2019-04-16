@@ -2,6 +2,7 @@ package com.holding.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -27,6 +28,9 @@ public interface MenuService {
 	//根据Mid查询菜单
 	List<Menu> getMenuByMid(Integer menuMid) throws Exception;
 	
+	//根据ID查询菜单
+	Menu getMenuById(Integer menuId) throws Exception;
+	
 	//根据已获得一级菜单id查询二级菜单
 	List<MenuVM> getAllMenuByMid()throws Exception;
 	
@@ -34,14 +38,14 @@ public interface MenuService {
 	Menu getMenuByName(String menuname) throws Exception;
 	
 	//插入新菜单
-	void insertMenu(Menu menu)throws SQLException;
+	void insertMenu(Menu menu)throws Exception;
 	
 	//删除菜单
-	void deleteMenu(Integer menuid) throws SQLException;
+	void deleteMenu(Integer menuid) throws Exception;
 	
 	//根据菜单名删除菜单
-	int deleteMenuByName(String menuName) throws SQLException;
+	int deleteMenuByName(String menuName) throws Exception;
 	
 	//更新菜单
-	void updateMenu(Integer menuid,Menu menu) throws SQLException;
+	Map<String, Object> updateMenu(Menu menu) throws Exception;
 }

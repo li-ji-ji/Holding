@@ -12,8 +12,10 @@ public interface PlaceholderrateService {
 /*---------查询--------*/	
 	//查询所有占位记录
 	List<Placeholderrate> getAll() throws Exception;
-	//根据图书馆名称查询最新占位记录
+	//根据图书馆ID查询最新占位记录
 	public Placeholderrate getLastestByLibraryid(Integer libraryId) throws Exception;
+	//根据自习室ID查询最新占位记录
+	public Placeholderrate getLastestByRoomid(Integer roomId) throws Exception;
 /*---------查询--------*/	
 	
 /*---------删除--------*/	
