@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.holding.po.Library;
 import com.holding.service.LibraryService;
 import com.holding.vm.LibraryPercentageVm;
-import com.holding.vm.LibraryVm;
+import com.holding.vm.LibraryChildVm;
 
 @RestController
 @RequestMapping("/library")
@@ -23,13 +23,13 @@ public class LibraryController {
 	
 	//通过区域获取图书馆列表
 	@RequestMapping("/getLibraryPercentageVmList.do")
-	public List<LibraryPercentageVm> getLibraryPercentageVmList(int provinceId, int cityId) {
+	public List<LibraryPercentageVm> getLibraryPercentageVmList(int provinceId, int cityId) throws Exception {
 		return libraryService.getLibraryPercentageVmList(provinceId, cityId);
 	}
 	
 	//根据定位到位置信息
-	@RequestMapping("/getLibraryVm.do")
-	public LibraryVm getLibraryVm(int libraryId, int floorId, int roomId, int deskId, int seatId) {
+	@RequestMapping("/getLibraryChildVm.do")
+	public LibraryChildVm getLibraryChildVm(int libraryId, int floorId, int roomId, int deskId, int seatId) {
 		return libraryService.getLibraryVmById(libraryId, floorId, roomId, deskId, seatId);
 	}
 	

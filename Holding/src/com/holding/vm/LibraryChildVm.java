@@ -2,7 +2,7 @@ package com.holding.vm;
 
 import com.holding.po.Library;
 
-public class LibraryVm extends Library{
+public class LibraryChildVm extends Library{
 
 	private FloorChildVm floorVm;
 

@@ -15,9 +15,10 @@ import com.holding.po.Library;
 import com.holding.po.LibraryExample;
 import com.holding.service.FloorService;
 import com.holding.service.LibraryService;
+import com.holding.service.PlaceholderrateService;
 import com.holding.vm.FloorChildVm;
 import com.holding.vm.LibraryPercentageVm;
-import com.holding.vm.LibraryVm;
+import com.holding.vm.LibraryChildVm;
 
 @Service
 public class LibraryServiceImpl implements LibraryService{
@@ -25,9 +26,12 @@ public class LibraryServiceImpl implements LibraryService{
 	@Autowired
 	private LibraryMapper libraryMapper;
 
+	@Autowired
+	private PlaceholderrateService placeholderrateService;
+	
 	//通过区域获取包含占座率的图书馆列表
 	@Override
-	public List<LibraryPercentageVm> getLibraryPercentageVmList(int provinceId, int cityId) {
+	public List<LibraryPercentageVm> getLibraryPercentageVmList(int provinceId, int cityId) throws Exception {
 		List<LibraryPercentageVm> libraryPercentageVms = new ArrayList<>();
 		LibraryExample libraryExample = new LibraryExample();
 		LibraryExample.Criteria criteria = libraryExample.createCriteria();
@@ -46,7 +50,7 @@ public class LibraryServiceImpl implements LibraryService{
 			libraryPercentageVm.setLatitude(library.getLatitude());
 			libraryPercentageVm.setLongitude(library.getLongitude());
 			libraryPercentageVm.setStatus(library.getStatus());
-			libraryPercentageVm.setPercentage(0.5);
+			libraryPercentageVm.setPercentage(placeholderrateService.getLastestByLibraryid(library.getId()).getLlibraryrate());
 			libraryPercentageVms.add(libraryPercentageVm);
 		}
 		return libraryPercentageVms;
@@ -57,8 +61,8 @@ public class LibraryServiceImpl implements LibraryService{
 	
 	//定位座位
 	@Override
-	public LibraryVm getLibraryVmById(int libraryId, int floorId, int roomId, int deskId, int seatId) {
-		LibraryVm libraryVm = new LibraryVm();
+	public LibraryChildVm getLibraryVmById(int libraryId, int floorId, int roomId, int deskId, int seatId) {
+		LibraryChildVm libraryVm = new LibraryChildVm();
 		FloorChildVm floorVm = floorService.getFloorVmById(floorId, roomId, deskId, seatId);
 		libraryVm.setFloorVm(floorVm);
 		Library library = libraryMapper.selectByPrimaryKey(libraryId);

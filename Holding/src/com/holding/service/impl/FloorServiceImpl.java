@@ -2,7 +2,9 @@ package com.holding.service.impl;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -83,16 +85,22 @@ public class FloorServiceImpl implements FloorService {
 	}
 
 	@Override
-	public void insertFloor(Floor floor) throws SQLException {
+	public Map<String, Object> insertFloor(Floor floor) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		try {
 			floorMapper.insertSelective(floor);
+			msg.put("success", true);
+			msg.put("msg", "添加成功");
 		} catch (Exception e) {
-			throw new SQLException("添加失败");
+			msg.put("success", false);
+			msg.put("msg", "添加失败");
 		}
+		return msg;
 	}
 
 	@Override
-	public void deleteFloor(List<Integer> floorIds) throws SQLException {
+	public Map<String, Object> deleteFloor(List<Integer> floorIds) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		for (int floorId : floorIds) {
 			try {
 				List<Room> rooms = roomService.getRoomlistByFloorId(floorId);
@@ -102,19 +110,28 @@ public class FloorServiceImpl implements FloorService {
 				}
 				roomService.deleteRoom(roomIds);
 				floorMapper.deleteByPrimaryKey(floorId);
+				msg.put("success", true);
+				msg.put("msg", "删除成功");
 			} catch (Exception e) {
-				throw new SQLException("删除失败");
+				msg.put("success", false);
+				msg.put("msg", "删除失败");
 			}
 		}
+		return msg;
 	}
 
 	@Override
-	public void updateFloor(Floor floor) throws SQLException {
+	public Map<String, Object> updateFloor(Floor floor) throws SQLException {
+		Map<String, Object> msg = new HashMap<>();
 		try {
 			floorMapper.updateByPrimaryKeySelective(floor);
+			msg.put("success", true);
+			msg.put("msg", "修改成功");
 		} catch (Exception e) {
-			throw new SQLException("修改失败");
+			msg.put("success", false);
+			msg.put("msg", "修改失败");
 		}
+		return msg;
 	}
 
 	@Override

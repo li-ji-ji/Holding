@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 
 import com.holding.po.Library;
 import com.holding.vm.LibraryPercentageVm;
-import com.holding.vm.LibraryVm;
+import com.holding.vm.LibraryChildVm;
 
 @Service
 public interface LibraryService {
 	
-	public List<LibraryPercentageVm> getLibraryPercentageVmList(int provinceId,int cityId);
+	public List<LibraryPercentageVm> getLibraryPercentageVmList(int provinceId,int cityId) throws Exception;
 	
-	public LibraryVm getLibraryVmById(int libraryId,int floorId,int roomId,int deskId,int seatId);
+	public LibraryChildVm getLibraryVmById(int libraryId,int floorId,int roomId,int deskId,int seatId);
 
 	public Map<String, Object> insertLibrary(Library library) throws SQLException;
 	

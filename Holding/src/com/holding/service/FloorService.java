@@ -2,6 +2,7 @@ package com.holding.service;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Service;
 
@@ -21,9 +22,9 @@ public interface FloorService {
 	
 	public List<Floor> getFloorListBylibraryId(int libraryId);
 
-	public void insertFloor(Floor floor) throws SQLException;
+	public Map<String, Object> insertFloor(Floor floor) throws SQLException;
 	
-	public void deleteFloor(List<Integer> floorIds) throws SQLException;
+	public Map<String, Object> deleteFloor(List<Integer> floorIds) throws SQLException;
 	
-	public void updateFloor(Floor floor) throws SQLException;	
+	public Map<String, Object> updateFloor(Floor floor) throws SQLException;	
 }
