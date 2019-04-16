@@ -78,6 +78,7 @@
   </div>
 </form>
 <script>
+var status;
 layui.use(['form', 'layedit', 'laydate'], function(){
   var form = layui.form
   ,layer = layui.layer
@@ -122,24 +123,120 @@ layui.use(['form', 'layedit', 'laydate'], function(){
   form.on('submit(demo1)', function(data){
 	  console.log(data.field);
 	  var menuJSON=JSON.stringify(data.field);
-	  $.ajax({
-		  "url": "${basePath }/menu/updateMenuByMenu.do",
-		  "data":"menu="+menuJSON,
-		  "type":"post",
-    	  "dataType" : "text",
-    	  "async" :false,
-    	  "success" : function (resultMsg) {
-    		  console.log("成功");
-			}
-	  });
-    /* layer.alert(JSON.stringify(data.field), {
-      title: '最终的提交信息'
-    })
-    return false; */
+	  if(status==0){
+		  $.ajax({
+			  "url": "${basePath }/menu/updateMenuByMenu.do",
+			  "data":"menu="+menuJSON,
+			  "type":"post",
+	    	  "dataType" : "text",
+	    	  "async" :false,
+	    	  "success" : function (resultMsg) {
+	    		  if(resultMsg==1){
+	    			  layer.open({
+	    				    type: 1 //不显示标题栏   title : false/标题
+	    				    ,title: "修改成功，返回菜单"
+	    				    ,closeBtn: false
+	    				    ,area: '300px;'
+	    				    ,shade: 0.8
+	    				    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	    				    ,resize: false
+	    				    ,btn: ['好的']
+	    				    ,btnAlign: 'c'
+	    				    ,moveType: 1 //拖拽模式，0或者1
+	    				    ,success: function(layero){
+	    				         var btn = layero.find('.layui-layer-btn');
+	    				            btn.find('.layui-layer-btn0').attr({
+	    				                 href: '/Holding/menu/getMenuTable.do'
+	    				            ,target: '_parent'
+	    				        });
+	    				    }
+	    				});
+	    		  }else{
+	    			  layer.open({
+	  				    type: 1 //不显示标题栏   title : false/标题
+	  				    ,title: "修改失败，返回菜单"
+	  				    ,closeBtn: false
+	  				    ,area: '300px;'
+	  				    ,shade: 0.8
+	  				    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	  				    ,resize: false
+	  				    ,btn: ['好的']
+	  				    ,btnAlign: 'c'
+	  				    ,moveType: 1 //拖拽模式，0或者1
+	  				    ,success: function(layero){
+	  				         var btn = layero.find('.layui-layer-btn');
+	  				            btn.find('.layui-layer-btn0').attr({
+	  				                 href: '/Holding/menu/getMenuTable.do'
+	  				            ,target: '_parent'
+	  				        });
+	  				    }
+	  				});
+	    		  }
+				}
+		  });
+	  }else{
+		  $.ajax({
+			  "url": "${basePath }/menu/addmenu.do",
+			  "data":"menu="+menuJSON,
+			  "type":"post",
+	    	  "dataType" : "text",
+	    	  "async" :false,
+	    	  "success" : function (resultMsg) {
+	    		  if(resultMsg==1){
+	    			  layer.open({
+	    				    type: 1 //不显示标题栏   title : false/标题
+	    				    ,title: "添加成功，返回菜单"
+	    				    ,closeBtn: false
+	    				    ,area: '300px;'
+	    				    ,shade: 0.8
+	    				    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	    				    ,resize: false
+	    				    ,btn: ['好的']
+	    				    ,btnAlign: 'c'
+	    				    ,moveType: 1 //拖拽模式，0或者1
+	    				    ,success: function(layero){
+	    				         var btn = layero.find('.layui-layer-btn');
+	    				            btn.find('.layui-layer-btn0').attr({
+	    				                 href: '/Holding/menu/getMenuTable.do'
+	    				            ,target: '_self'
+	    				        });
+	    				    }
+	    				});
+	    		  }else{
+	    			  layer.open({
+	  				    type: 1 //不显示标题栏   title : false/标题
+	  				    ,title: "添加失败，返回菜单"
+	  				    ,closeBtn: false
+	  				    ,area: '300px;'
+	  				    ,shade: 0.8
+	  				    ,id: 'LAY_layuipro' //设定一个id，防止重复弹出
+	  				    ,resize: false
+	  				    ,btn: ['好的']
+	  				    ,btnAlign: 'c'
+	  				    ,moveType: 1 //拖拽模式，0或者1
+	  				    ,success: function(layero){
+	  				         var btn = layero.find('.layui-layer-btn');
+	  				            btn.find('.layui-layer-btn0').attr({
+	  				                 href: '/Holding/menu/getMenuTable.do'
+	  				            ,target: '_self'
+	  				        });
+	  				    }
+	  				});
+	    		  }
+				}
+		  });
+	  }
+	  
+	 
+	  
+    return false;
   });
+  
   $(function getMenu() {
 		var menuMsg=eval('('+parent.json+')');
+		status=1;
 		if(menuMsg!=null){
+			status=0;
 			$("#menuid").val(menuMsg.menuid);
 			$("#menuname").val(menuMsg.menuname);
 			$("#menumid").val(menuMsg.menumid);

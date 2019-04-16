@@ -38,7 +38,7 @@ public interface MenuService {
 	Menu getMenuByName(String menuname) throws Exception;
 	
 	//插入新菜单
-	void insertMenu(Menu menu)throws Exception;
+	int insertMenu(Menu menu)throws Exception;
 	
 	//删除菜单
 	void deleteMenu(Integer menuid) throws Exception;

@@ -69,9 +69,15 @@ public class MenuServiceImpl implements MenuService {
 
 
 	@Override
-	public void insertMenu(Menu menu) throws SQLException{
-		// TODO Auto-generated method stub
-		menuMapper.insertSelective(menu);
+	public int insertMenu(Menu menu) throws SQLException{
+		try {
+			menuMapper.insertSelective(menu);
+		} catch (Exception e) {
+			// TODO: handle exception
+			System.out.println("添加失败");
+			return 0;
+		}
+		return 1;
 	}
 
 

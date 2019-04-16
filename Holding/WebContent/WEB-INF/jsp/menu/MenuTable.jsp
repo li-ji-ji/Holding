@@ -18,7 +18,7 @@
 				<thead>
 					<tr>
 						<th lay-data="{type:'checkbox'}">ID</th>
-						<th lay-data="{field:'menuid', width:80, sort: true}">菜单ID</th>
+						<th lay-data="{field:'menuid', width:100, sort: true}">菜单ID</th>
 						<th
 							lay-data="{field:'menuname', width:100, sort: true, edit: 'text'}">菜单</th>
 						<th lay-data="{field:'menumid', edit: 'text', Width: 80}">上级菜单ID</th>
@@ -57,7 +57,22 @@
 			    } else if(obj.event === 'del'){
 			      layer.confirm('真的删除行么', function(index){
 			        obj.del();
+			        console.log(data.menuid);
+			        $.ajax({
+			        	"url" : "${basePath}/menu/deleteMenuById.do",
+			        	"data" : "menuid="+data.menuid,
+			        	"type" : "post",
+			        	"dataType" : "text",
+			        	"success" : function (returnMsg) {
+							if(returnMsg==1){
+								layer.alert("删除成功");
+							}else{
+								layer.alert("删除失败");
+							}
+						}
+			        })
 			        layer.close(index);
+			        
 			      });
 			    } else if(obj.event === 'edit'){
 			      json=JSON.stringify(data);

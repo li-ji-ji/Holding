@@ -104,11 +104,17 @@ public class MenuController {
 	
 
 	//根据菜单名删除菜单
-	@RequestMapping("/deleteMenuByName.do")
-	public String deleteMenuByName(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
-		String menuName=request.getParameter("menuname");
-		menuService.deleteMenuByName(menuName);
-		return "menu/MenuTable";
+	@RequestMapping("/deleteMenuById.do")
+	@ResponseBody
+	public int deleteMenuByName(HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		String value=request.getParameter("menuid");
+		Integer menuId=Integer.valueOf(value);
+		try {
+			menuService.deleteMenu(menuId);
+		} catch (Exception e) {
+			return 0;
+		}
+		return 1;
 	}
 	
 	
@@ -117,9 +123,7 @@ public class MenuController {
 	@ResponseBody
 	public int updateMenuByName(Model model,HttpSession session, HttpServletRequest request, HttpServletResponse response)throws Exception{
 		String value=request.getParameter("menu");
-		System.out.println(value);
 		Menu menu=JSON.parseObject(value, Menu.class);
-		System.out.println(menu);
 		menuService.updateMenu(menu);
 		/*Integer menuId=menu.getMenuid(); 
 		Menu returnMenu=menuService.getMenuById(menuId); 
@@ -128,10 +132,18 @@ public class MenuController {
 		return 1;
 	 }
 	 
+	//添加菜单数据
 	 @RequestMapping("/addmenu.do")
-	 public String addMenu(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
-		 
-		 return "menu/BackgroundMainPage";
+	 @ResponseBody
+	 public int addMenu(HttpSession session,HttpServletRequest request,HttpServletResponse response) throws Exception{
+		 String value=request.getParameter("menu");
+		 Menu menu=JSON.parseObject(value, Menu.class);
+		 try {
+			 menuService.insertMenu(menu);
+		} catch (Exception e) {
+			return 0;
+		}
+		 return 1;
 		 
 	 }
 	 
