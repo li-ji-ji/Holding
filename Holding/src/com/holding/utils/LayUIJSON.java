@@ -3,12 +3,12 @@ package com.holding.utils;
 import java.util.ArrayList;
 import java.util.List;
 
-	public class LayUIJSON<Menu> {
+	public class LayUIJSON<Object> {
 		 
 	    private int code=0;
 	    private String msg;
 	    private Long count; //总条数
-	    private List<Menu> data = new ArrayList(); //装前台当前页的数据
+	    private List<Object> data = new ArrayList(); //装前台当前页的数据
 		public int getCode() {
 			return code;
 		}
@@ -27,10 +27,10 @@ import java.util.List;
 		public void setCount(Long count) {
 			this.count = count;
 		}
-		public List<Menu> getData() {
+		public List<Object> getData() {
 			return data;
 		}
-		public void setData(List<Menu> data) {
+		public void setData(List<Object> data) {
 			this.data = data;
 		}
 	    
