@@ -53,7 +53,7 @@ public class FloorServiceImpl implements FloorService {
 
 	// 获取包含自习室列表的楼层列表
 	@Override
-	public List<FloorChildPercentagelistVm> getFloorChildPercentagelistVmListByLibraryId(int libraryId) {
+	public List<FloorChildPercentagelistVm> getFloorChildPercentagelistVmListByLibraryId(int libraryId) throws Exception {
 		List<Floor> floors = this.getFloorListBylibraryId(libraryId);
 		List<FloorChildPercentagelistVm> floorVms = new ArrayList<>();
 		for (Floor floor : floors) {

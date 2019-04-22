@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.holding.po.Desk;
 import com.holding.po.Floor;
 import com.holding.service.FloorService;
 import com.holding.vm.FloorChildListVm;
@@ -29,7 +28,7 @@ public class FloorController {
 	}
 	
 	@RequestMapping("/getFloorChildPercentagelistVmListByLibraryId.do")
-	public List<FloorChildPercentagelistVm> getFloorChildPercentagelistVmListByLibraryId(int libraryId){
+	public List<FloorChildPercentagelistVm> getFloorChildPercentagelistVmListByLibraryId(int libraryId) throws Exception{
 		return floorService.getFloorChildPercentagelistVmListByLibraryId(libraryId);
 	}
 	

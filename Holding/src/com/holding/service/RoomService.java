@@ -15,7 +15,7 @@ public interface RoomService {
 
 	public List<Room> getRoomlistByFloorId(int floorId);
 	
-	public List<RoomPercentageVm> getRoomPercentageVm(int floorId);
+	public List<RoomPercentageVm> getRoomPercentageVm(int floorId) throws Exception;
 	
 	public RoomChildVm getRoomChildVmById(int roomId,int deskId,int seatId);
 	

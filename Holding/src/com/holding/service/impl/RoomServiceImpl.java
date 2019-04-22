@@ -14,6 +14,7 @@ import com.holding.po.Desk;
 import com.holding.po.Room;
 import com.holding.po.RoomExample;
 import com.holding.service.DeskService;
+import com.holding.service.PlaceholderrateService;
 import com.holding.service.RoomService;
 import com.holding.vm.DeskChildVm;
 import com.holding.vm.RoomChildVm;
@@ -25,6 +26,9 @@ public class RoomServiceImpl implements RoomService {
 	@Autowired
 	private RoomMapper roomMapper;
 	
+	@Autowired
+	private PlaceholderrateService placeholderrateService;
+	
 	@Override
 	public List<Room> getRoomlistByFloorId(int floorId) {
 		RoomExample roomExample = new RoomExample();
@@ -34,7 +38,7 @@ public class RoomServiceImpl implements RoomService {
 	}
 
 	@Override
-	public List<RoomPercentageVm> getRoomPercentageVm(int floorId) {
+	public List<RoomPercentageVm> getRoomPercentageVm(int floorId) throws Exception {
 		List<RoomPercentageVm> roomPercentageVms = new ArrayList<>();
 		List<Room> rooms = this.getRoomlistByFloorId(floorId);
 		for (Room room : rooms) {
@@ -44,7 +48,7 @@ public class RoomServiceImpl implements RoomService {
 			roomPercentageVm.setName(room.getName());
 			roomPercentageVm.setImageurl(room.getImageurl());
 			roomPercentageVm.setStatus(room.getStatus());
-			roomPercentageVm.setUsageQuantity(0.5);
+			roomPercentageVm.setUsageQuantity(placeholderrateService.getLastestByRoomid(room.getId()).getRoomrate());
 			roomPercentageVms.add(roomPercentageVm);
 		}
 		return roomPercentageVms;

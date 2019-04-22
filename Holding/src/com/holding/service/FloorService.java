@@ -16,7 +16,7 @@ public interface FloorService {
 
 	public List<FloorChildListVm> getFloorChildListVmlistByLibraryId(int libraryId);
 	
-	public List<FloorChildPercentagelistVm> getFloorChildPercentagelistVmListByLibraryId(int libraryId);
+	public List<FloorChildPercentagelistVm> getFloorChildPercentagelistVmListByLibraryId(int libraryId) throws Exception;
 	
 	public FloorChildVm getFloorVmById(int floorId,int roomId,int deskId,int seatId);
 	
